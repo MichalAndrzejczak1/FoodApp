@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_speak"
+        android:icon="@android:drawable/ic_lock_silent_mode_off"
+        android:title="AudioMode"
+        app:showAsAction="ifRoom" />
+<!--    <item-->
+<!--        android:id="@+id/action_food"-->
+<!--        android:icon="@drawable/ic_orderfood_white"-->
+<!--        android:title="food"-->
+<!--        app:showAsAction="ifRoom" />-->
+
+    <item
+        android:id="@+id/action_signout"
+        android:title="Signout"
+        app:showAsAction="never" />
+</menu>
