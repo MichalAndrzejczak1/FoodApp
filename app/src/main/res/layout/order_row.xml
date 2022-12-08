@@ -31,16 +31,17 @@
 
             <ImageView
                 android:id="@+id/iv_orderImageList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
+                android:contentDescription="@string/order_image_list"
                 android:cropToPadding="true"
                 android:scaleType="fitXY"
-                android:src="@{url}"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:src="@{url}" />
 
             <TextView
                 android:id="@+id/tv_OrderTitle"
-                android:text="Its title"
+                android:text="@string/its_title"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:padding="10dp"

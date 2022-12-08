@@ -3,7 +3,7 @@
     <item
         android:id="@+id/action_speak"
         android:icon="@android:drawable/ic_lock_silent_mode_off"
-        android:title="AudioMode"
+        android:title="@string/audiomode"
         app:showAsAction="ifRoom" />
 <!--    <item-->
 <!--        android:id="@+id/action_food"-->
@@ -13,6 +13,6 @@
 
     <item
         android:id="@+id/action_signout"
-        android:title="Signout"
+        android:title="@string/signout"
         app:showAsAction="never" />
 </menu>

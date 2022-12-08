@@ -3,24 +3,17 @@ package com.example.foodapp;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import com.example.foodapp.R;
 import com.example.foodapp.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Objects;
-
-import javax.annotation.Nullable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser currentUser;
 
-    private FirebaseFirestore db =  FirebaseFirestore.getInstance();
-    private CollectionReference collectionReference = db.collection("Users");
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final CollectionReference collectionReference = db.collection("Users");
 
 
     @Override
@@ -44,19 +37,19 @@ public class MainActivity extends AppCompatActivity {
 
         authStateListener = firebaseAuth -> {
             currentUser = firebaseAuth.getCurrentUser();
-            if(currentUser != null){
+            if (currentUser != null) {
                 currentUser = firebaseAuth.getCurrentUser();
                 final String currentUserId = currentUser.getUid();
 
-                collectionReference.whereEqualTo("userId",currentUserId)
+                collectionReference.whereEqualTo("userId", currentUserId)
                         .addSnapshotListener((value, error) -> {
-                            if(error != null){
+                            if (error != null) {
                                 return;
                             }
                             String name;
 
-                            if(!value.isEmpty()){
-                                for (QueryDocumentSnapshot snapshot : value){
+                            if (!Objects.requireNonNull(value).isEmpty()) {
+                                for (QueryDocumentSnapshot snapshot : value) {
                                     FoodApi foodApi = FoodApi.getInstance();
                                     foodApi.setUserId(snapshot.getString("userId"));
                                     foodApi.setUsername(snapshot.getString("username"));
@@ -72,11 +65,8 @@ public class MainActivity extends AppCompatActivity {
         };
 
 
-
         //Get started button
-        binding.btnGetStarted.setOnClickListener(view -> {
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-        });
+        binding.btnGetStarted.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, LoginActivity.class)));
     }
 
 

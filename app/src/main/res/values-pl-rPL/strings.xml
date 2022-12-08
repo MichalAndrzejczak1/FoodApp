@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FoodApp</string>
+    <string name="goCartDescription">Idź do koszyka</string>
+    <string name="its_title">jego tytuł</string>
+    <string name="order_image_list">lista obrazków zamówień</string>
+    <string name="title">tytuł</string>
+    <string name="food_items_icon">ikona jedzenia</string>
+    <string name="logout_on_exit">Wyloguj przy wyjściu</string>
+    <string name="logout_icon">Ikona wylogowania</string>
+    <string name="night_theme_icon">Ikona motywu ciemnego</string>
+    <string name="night_theme">motyw ciemny</string>
+    <string name="silent_mode_icon">ikona trybu cichego</string>
+    <string name="silent_mode">tryb cichy</string>
+    <string name="inapp_sound_level">poziom głośności aplikacji</string>
+    <string name="go_to_settings">idź do ustawień</string>
+    <string name="account_settings">ustawienia konta</string>
+    <string name="products">Produkty</string>
+    <string name="categories">Kategorie</string>
+    <string name="order_your_food_in_foodapp">Zamów swoje posiłki w FoodApp</string>
+    <string name="hi_accountname">Cześć @AccountName</string>
+    <string name="or">LUB</string>
+    <string name="login">Login</string>
+    <string name="signout">Wyloguj</string>
+    <string name="audiomode">Tryb Audio</string>
+    <string name="gcm_defaultSenderId" translatable="false">tytuł</string>
+    <string name="no_orders_add_some_by_clicking_here">Brak zamówień! Zamów coś klikając tutaj!</string>
+    <string name="create_account">Utwórz konto</string>
+    <string name="username">Nazwa użytkownika</string>
+    <string name="user_s_profile_picture">zdjęcie profilowe użytkownika</string>
+    <string name="settings">Ustawienia</string>
+    <string name="your_orders">Twoje zamówienia</string>
+    <string name="order_food">Zamów posiłek</string>
+    <string name="your_account">Twoje konto</string>
+    <string name="money">Monety</string>
+    <string name="tu_srodkikonta">Tu @srodkikonta$</string>
+    <string name="password">Hasło</string>
+    <string name="tu_haslokonta">Tu @haslokonta</string>
+    <string name="name">Imię</string>
+    <string name="user_profile_picture">zdjęcie profilowe użytkownika</string>
+    <string name="password_icon">ikona hasła</string>
+    <string name="money_icon">ikona monety</string>
+    <string name="email_logo">ikona email</string>
+    <string name="orders_list_logo">ikona listy zamówień</string>
+    <string name="settings_icon">ikona ustawień</string>
+    <string name="account_icon">ikona konta</string>
+    <string name="account">Konto</string>
+    <string name="order_food_icon">ikona zamawiania posiłku</string>
+    <string name="tu_emailkonta">Tu @emailkonta</string>
+    <string name="email">Email</string>
+    <string name="get_started">Zaczynajmy</string>
+    <string name="hungry_you_re_in_the_right_place">Głodny? Jesteś we właściwym miejscu!</string>
+    <string name="food_order">Zamawianie Posiłku</string>
+</resources>

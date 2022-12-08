@@ -38,7 +38,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:baselineAligned="false">
 
                     <LinearLayout
                         android:id="@+id/homeBtn"
@@ -50,22 +51,24 @@
                         <ImageView
                             android:id="@+id/ivOrderFood"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10px"
+                            android:layout_height="0dp"
+                            android:layout_margin="5dp"
                             android:layout_weight="1"
                             android:background="#F3DB0E"
                             android:backgroundTint="#F39B04"
-                            app:srcCompat="@drawable/ic_foodlist" />
+                            android:contentDescription="@string/order_food_icon"
+                            app:srcCompat="@drawable/ic_foodlist"
+                            tools:ignore="NestedWeights" />
 
                         <TextView
                             android:id="@+id/tvOrderYourFood"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Order Food"
+                            android:text="@string/order_food"
                             android:textAlignment="center"
                             android:textColor="#676767"
                             android:textSize="16sp"
-                            android:textStyle="bold|italic"></TextView>
+                            android:textStyle="bold|italic" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -78,22 +81,24 @@
                         <ImageView
                             android:id="@+id/ivListOfOrders"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10px"
+                            android:layout_height="0dp"
+                            android:layout_margin="5dp"
                             android:layout_weight="1"
                             android:background="#F3DB0E"
                             android:backgroundTint="#F39B04"
-                            app:srcCompat="@drawable/ic_listoforders" />
+                            android:contentDescription="@string/orders_list_logo"
+                            app:srcCompat="@drawable/ic_listoforders"
+                            tools:ignore="NestedWeights" />
 
                         <TextView
                             android:id="@+id/tvYourOrders"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Your orders"
+                            android:text="@string/your_orders"
                             android:textAlignment="center"
                             android:textColor="#676767"
                             android:textSize="16sp"
-                            android:textStyle="bold|italic"></TextView>
+                            android:textStyle="bold|italic" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -106,22 +111,24 @@
                         <ImageView
                             android:id="@+id/ivAccount"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10px"
+                            android:layout_height="0dp"
+                            android:layout_margin="5dp"
                             android:layout_weight="1"
                             android:background="#F3DB0E"
                             android:backgroundTint="#F39B04"
-                            app:srcCompat="@drawable/ic_account" />
+                            android:contentDescription="@string/account"
+                            app:srcCompat="@drawable/ic_account"
+                            tools:ignore="NestedWeights" />
 
                         <TextView
                             android:id="@+id/tvAccount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Account"
+                            android:text="@string/account"
                             android:textAlignment="center"
                             android:textColor="#676767"
                             android:textSize="16sp"
-                            android:textStyle="bold|italic"></TextView>
+                            android:textStyle="bold|italic" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -134,22 +141,24 @@
                         <ImageView
                             android:id="@+id/ivSettings"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10px"
+                            android:layout_height="0dp"
+                            android:layout_margin="5dp"
                             android:layout_weight="1"
                             android:background="#F3DB0E"
                             android:backgroundTint="#F39B04"
-                            app:srcCompat="@drawable/ic_settings" />
+                            android:contentDescription="@string/settings_icon"
+                            app:srcCompat="@drawable/ic_settings"
+                            tools:ignore="NestedWeights" />
 
                         <TextView
                             android:id="@+id/tvSettings"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Settings"
+                            android:text="@string/settings"
                             android:textAlignment="center"
                             android:textColor="#676767"
                             android:textSize="16sp"
-                            android:textStyle="bold|italic"></TextView>
+                            android:textStyle="bold|italic" />
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.bottomappbar.BottomAppBar>
@@ -166,12 +175,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            </LinearLayout>
         </ScrollView>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -194,7 +197,7 @@
             android:id="@+id/tv_ListNoEntry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='No orders! Add some by clicking here!'
+            android:text='@string/no_orders_add_some_by_clicking_here'
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/rv_List"
             app:layout_constraintEnd_toEndOf="@+id/rv_List"

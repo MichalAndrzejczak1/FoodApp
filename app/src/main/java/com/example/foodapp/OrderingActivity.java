@@ -1,28 +1,23 @@
 package com.example.foodapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
-import com.example.foodapp.databinding.ActivityFoodListBinding;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
 import com.example.foodapp.databinding.ActivityOrderingBinding;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -39,11 +34,9 @@ public class OrderingActivity extends AppCompatActivity {
     FirebaseUser currentUser;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private CollectionReference collectionReference = db.collection("Users");
+    private final CollectionReference collectionReference = db.collection("Users");
 
-    private List<Order> orderList = new ArrayList<>();
-
-
+    private final List<Order> orderList = new ArrayList<>();
 
 
     @Override
@@ -64,30 +57,23 @@ public class OrderingActivity extends AppCompatActivity {
         collectionReference.whereEqualTo("userId", FoodApi.getInstance()
                         .getUserId())
                 .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if(!queryDocumentSnapshots.isEmpty()){
-                            for (QueryDocumentSnapshot users : queryDocumentSnapshots){
-                                User user = users.toObject(User.class);
-                                binding.tvGreetings.setText("Hi "+ user.getUsername()+"!");
-                                Picasso.get()
-                                        .load(Uri.parse(user.getImageURL()))
-                                        .placeholder(R.drawable.ic_accountimage)
-                                        .fit()
-                                        .into(binding.ivOrderAccountImage);
-                            }
-
-                        }else {
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        for (QueryDocumentSnapshot users : queryDocumentSnapshots) {
+                            User user = users.toObject(User.class);
+                            binding.tvGreetings.setText(String.format("Hi %s!", user.getUsername()));
+                            Picasso.get()
+                                    .load(Uri.parse(user.getImageURL()))
+                                    .placeholder(R.drawable.ic_accountimage)
+                                    .fit()
+                                    .into(binding.ivOrderAccountImage);
                         }
+
                     }
                 }).addOnFailureListener(e -> Toast.makeText(OrderingActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show());
 
 
     }
-
-
 
 
     @Override
@@ -96,16 +82,17 @@ public class OrderingActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_speak:
-                if( currentUser != null && auth != null){
-//                    startActivity(new Intent(com.example.foodapp.FoodListActivity.this, PostJournalActivity.class));
+                if (currentUser != null && auth != null) {
+                    // TODO
                 }
                 break;
             case R.id.action_signout:
-                if( currentUser != null && auth != null){
+                if (currentUser != null && auth != null) {
                     auth.signOut();
                 }
                 startActivity(new Intent(this, MainActivity.class));

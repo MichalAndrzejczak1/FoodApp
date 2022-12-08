@@ -27,7 +27,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="Email"
+                    android:text="@string/email"
                     android:textSize="14sp"
                     android:textStyle="bold|italic"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -41,6 +41,7 @@
                     android:id="@+id/ivNazwaKontaObrazek"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/user_s_profile_picture"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.022"
@@ -53,7 +54,7 @@
                     android:id="@+id/tvNazwaKontaText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tu @emailkonta"
+                    android:text="@string/tu_emailkonta"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.18"
@@ -65,6 +66,7 @@
                     android:id="@+id/ivEmailKontaObrazek"
                     android:layout_width="48dp"
                     android:layout_height="50dp"
+                    android:contentDescription="@string/email_logo"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.022"
@@ -79,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="3dp"
                     android:layout_marginEnd="264dp"
-                    android:text="Name"
+                    android:text="@string/name"
                     android:textSize="14sp"
                     android:textStyle="bold|italic"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -93,7 +95,7 @@
                     android:id="@+id/tvEmailKontaText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tu @emailkonta"
+                    android:text="@string/tu_emailkonta"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -105,7 +107,7 @@
                     android:id="@+id/tvHasloKontaText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tu @haslokonta"
+                    android:text="@string/tu_haslokonta"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -117,6 +119,7 @@
                     android:id="@+id/ivHasloKontaObrazek"
                     android:layout_width="48dp"
                     android:layout_height="50dp"
+                    android:contentDescription="@string/password_icon"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.022"
@@ -129,7 +132,7 @@
                     android:id="@+id/tvHasloKonta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Password"
+                    android:text="@string/password"
                     android:textSize="14sp"
                     android:textStyle="bold|italic"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -143,6 +146,7 @@
                     android:id="@+id/ivSrodkiKontaObrazek"
                     android:layout_width="48dp"
                     android:layout_height="50dp"
+                    android:contentDescription="@string/money_icon"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.022"
@@ -155,7 +159,7 @@
                     android:id="@+id/tvSrodkiKontaText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tu @srodkikonta$"
+                    android:text="@string/tu_srodkikonta"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -167,7 +171,7 @@
                     android:id="@+id/tvSrodkiKonta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Money"
+                    android:text="@string/money"
                     android:textSize="14sp"
                     android:textStyle="bold|italic"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -212,7 +216,7 @@
             android:id="@+id/tvYourAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your Account"
+            android:text="@string/your_account"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/ivAccountImageAccountActivity"
             app:layout_constraintEnd_toEndOf="parent"
@@ -223,6 +227,7 @@
             android:id="@+id/ivAccountImageAccountActivity"
             android:layout_width="148dp"
             android:layout_height="166dp"
+            android:contentDescription="@string/user_profile_picture"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -257,7 +262,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:baselineAligned="false">
 
                     <LinearLayout
                         android:id="@+id/homeBtn"
@@ -269,22 +275,24 @@
                         <ImageView
                             android:id="@+id/ivOrderFood"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10px"
+                            android:layout_height="0dp"
+                            android:layout_margin="5dp"
                             android:layout_weight="1"
                             android:background="#F3DB0E"
                             android:backgroundTint="#F39B04"
-                            app:srcCompat="@drawable/ic_foodlist" />
+                            android:contentDescription="@string/order_food_icon"
+                            app:srcCompat="@drawable/ic_foodlist"
+                            tools:ignore="NestedWeights" />
 
                         <TextView
                             android:id="@+id/tvOrderYourFood"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Order Food"
+                            android:text="@string/order_food"
                             android:textAlignment="center"
                             android:textColor="#676767"
                             android:textSize="16sp"
-                            android:textStyle="bold|italic"></TextView>
+                            android:textStyle="bold|italic" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -297,22 +305,24 @@
                         <ImageView
                             android:id="@+id/ivListOfOrders"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10px"
+                            android:layout_height="0dp"
+                            android:layout_margin="5dp"
                             android:layout_weight="1"
                             android:background="#F3DB0E"
                             android:backgroundTint="#F39B04"
-                            app:srcCompat="@drawable/ic_listoforders" />
+                            android:contentDescription="@string/orders_list_logo"
+                            app:srcCompat="@drawable/ic_listoforders"
+                            tools:ignore="NestedWeights" />
 
                         <TextView
                             android:id="@+id/tvYourOrders"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Your orders"
+                            android:text="@string/your_orders"
                             android:textAlignment="center"
                             android:textColor="#676767"
                             android:textSize="16sp"
-                            android:textStyle="bold|italic"></TextView>
+                            android:textStyle="bold|italic" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -325,22 +335,24 @@
                         <ImageView
                             android:id="@+id/ivAccount"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10px"
+                            android:layout_height="0dp"
+                            android:layout_margin="5dp"
                             android:layout_weight="1"
                             android:background="#F3DB0E"
                             android:backgroundTint="#F39B04"
-                            app:srcCompat="@drawable/ic_account" />
+                            android:contentDescription="@string/account_icon"
+                            app:srcCompat="@drawable/ic_account"
+                            tools:ignore="NestedWeights" />
 
                         <TextView
                             android:id="@+id/tvAccount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Account"
+                            android:text="@string/account"
                             android:textAlignment="center"
                             android:textColor="#676767"
                             android:textSize="16sp"
-                            android:textStyle="bold|italic"></TextView>
+                            android:textStyle="bold|italic" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -353,22 +365,24 @@
                         <ImageView
                             android:id="@+id/ivSettings"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10px"
+                            android:layout_height="0dp"
+                            android:layout_margin="5dp"
                             android:layout_weight="1"
                             android:background="#F3DB0E"
                             android:backgroundTint="#F39B04"
-                            app:srcCompat="@drawable/ic_settings" />
+                            android:contentDescription="@string/settings_icon"
+                            app:srcCompat="@drawable/ic_settings"
+                            tools:ignore="NestedWeights" />
 
                         <TextView
                             android:id="@+id/tvSettings"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Settings"
+                            android:text="@string/settings"
                             android:textAlignment="center"
                             android:textColor="#676767"
                             android:textSize="16sp"
-                            android:textStyle="bold|italic"></TextView>
+                            android:textStyle="bold|italic" />
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.bottomappbar.BottomAppBar>
@@ -387,12 +401,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            </LinearLayout>
         </ScrollView>
 
 

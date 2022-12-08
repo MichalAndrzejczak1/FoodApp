@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_slab_bold"
-            android:text="Food Order "
+            android:text="@string/food_order"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,10 +45,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:accessibilityLiveRegion="polite"
                     android:fontFamily="@font/roboto_slab_bold"
                     android:gravity="center_horizontal"
-                    android:text="Hungry? You're in the right place!"
-                    android:textSize="19sp" />
+                    android:minHeight="48dp"
+                    android:text="@string/hungry_you_re_in_the_right_place"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
 
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
@@ -57,9 +60,9 @@
             android:id="@+id/btn_GetStarted"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Get Started"
-            android:textColor="@color/teal_200"
-            android:background="@color/transparent" />
+            android:background="@color/transparent"
+            android:text="@string/get_started"
+            android:textColor="#00838F" />
 
 
     </LinearLayout>
