@@ -2,7 +2,10 @@ package com.example.foodapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -24,6 +27,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import Model.User;
@@ -34,7 +38,9 @@ public class CreateAccountActivity extends AppCompatActivity {
     FirebaseUser currentUser;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     ActivityCreateAccountBinding binding;
-    private CollectionReference collectionReference = db.collection("Users");
+    private final CollectionReference collectionReference = db.collection("Users");
+
+    TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +78,12 @@ public class CreateAccountActivity extends AppCompatActivity {
                      .show();
          }
 
+        });
+
+        tts = new TextToSpeech(getApplicationContext(), i -> {
+            if (i != TextToSpeech.ERROR) {
+                tts.setLanguage(Locale.getDefault());
+            }
         });
     }
 
@@ -134,5 +146,30 @@ public class CreateAccountActivity extends AppCompatActivity {
         super.onStart();
         currentUser = auth.getCurrentUser();
         auth.addAuthStateListener(authStateListener);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_speak:
+                if (currentUser != null && auth != null) {
+                    tts.speak(getString(R.string.createAccountActivityHint), TextToSpeech.QUEUE_FLUSH, null);
+                }
+                break;
+            case R.id.action_signout:
+                if (currentUser != null && auth != null) {
+                    auth.signOut();
+                }
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -49,4 +49,11 @@
     <string name="title">title</string>
     <string name="order_image_list">order image list</string>
     <string name="its_title">Its title</string>
+    <string name="food_list">Food list</string>
+    <string name="accountActivityHint">In this activity you can manage your account. You can         change your profile picture, check your name, email, password and money.</string>
+    <string name="createAccountActivityHint">In this activity you can create your account. In order to do that you have to provide your username, email and password and then press create account button.</string>
+    <string name="foodListActivityHint">In this activity you can see the list of all dishes.</string>
+    <string name="loginActivityHint">In this activity you can log into application by entering your email and password. Once it\'s done, you can press login button. In case you don\'t have account, you can press register button in order to register.</string>
+    <string name="orderingActivityHint">In this activity you can choose food category and see list of products that you can order. When you select what you want to order, you can press button on the bottom of the screen (shopping cart icon).</string>
+    <string name="settingsActivityHint">In this activity you can manage settings of application. You can select if you want to logout from application on exit, select if you prefer night theme or select if you want to disable all sound effects (silent mode). You can also set sound level manually.</string>
 </resources>

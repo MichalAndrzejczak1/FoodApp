@@ -23,7 +23,6 @@
     <string name="login">Login</string>
     <string name="signout">Wyloguj</string>
     <string name="audiomode">Tryb Audio</string>
-    <string name="gcm_defaultSenderId" translatable="false">tytuł</string>
     <string name="no_orders_add_some_by_clicking_here">Brak zamówień! Zamów coś klikając tutaj!</string>
     <string name="create_account">Utwórz konto</string>
     <string name="username">Nazwa użytkownika</string>
@@ -51,4 +50,11 @@
     <string name="get_started">Zaczynajmy</string>
     <string name="hungry_you_re_in_the_right_place">Głodny? Jesteś we właściwym miejscu!</string>
     <string name="food_order">Zamawianie Posiłku</string>
+    <string name="food_list">Lista dań</string>
+    <string name="accountActivityHint">W tej aktywności możesz zarządzać swoim kontem. Możesz zmienić swoje zdjęcie profilowe, sprawdzić swoje imię, e-mail, hasło i pieniądze.</string>
+    <string name="createAccountActivityHint">W tej aktywności możesz utworzyć swoje konto. Aby to zrobić, musisz podać swoją nazwę użytkownika, adres e-mail i hasło, a następnie nacisnąć przycisk tworzenia konta.</string>
+    <string name="foodListActivityHint">W tej aktywności możesz zobaczyć listę wszystkich potraw.</string>
+    <string name="loginActivityHint">W tej aktywności możesz zalogować się do aplikacji, wprowadzając swój adres e-mail i hasło. Po zakończeniu możesz nacisnąć przycisk logowania. Jeśli nie masz konta, możesz nacisnąć przycisk rejestracji, aby się zarejestrować.</string>
+    <string name="orderingActivityHint">W tej aktywności możesz wybrać kategorię żywności i zobaczyć listę produktów, które możesz zamówić. Po wybraniu tego, co chcesz zamówić, możesz nacisnąć przycisk u dołu ekranu (ikona koszyka).</string>
+    <string name="settingsActivityHint">W tej aktywności możesz zarządzać ustawieniami aplikacji. Możesz wybrać czy chcesz wylogować się z aplikacji przy wyjściu, wybrać czy wolisz motyw nocny lub wybrać czy chcesz wyłączyć wszystkie efekty dźwiękowe (tryb cichy). Możesz również ustawić poziom dźwięku ręcznie.</string>
 </resources>

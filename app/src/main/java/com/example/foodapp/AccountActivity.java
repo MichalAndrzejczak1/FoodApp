@@ -1,50 +1,38 @@
 package com.example.foodapp;
 
-import androidx.activity.result.ActivityResultCallback;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-
-
 import com.example.foodapp.databinding.ActivityAccountBinding;
-import com.example.foodapp.databinding.ActivityOrderingBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-import com.google.firestore.v1.WriteResult;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.Locale;
 
-import Model.Order;
 import Model.User;
 
 public class AccountActivity extends AppCompatActivity {
@@ -61,6 +49,8 @@ public class AccountActivity extends AppCompatActivity {
     private StorageReference storageReference;
     private Uri imageUri;
     private CollectionReference collectionReference = db.collection("Users");
+
+    TextToSpeech tts;
 
 
     @Override
@@ -84,8 +74,8 @@ public class AccountActivity extends AppCompatActivity {
                         .getUserId())
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    if(!queryDocumentSnapshots.isEmpty()){
-                        for (QueryDocumentSnapshot users : queryDocumentSnapshots){
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        for (QueryDocumentSnapshot users : queryDocumentSnapshots) {
                             User user = users.toObject(User.class);
                             binding.tvEmailKontaText.setText(auth.getCurrentUser().getEmail());
                             binding.tvNazwaKontaText.setText(user.getUsername());
@@ -108,12 +98,17 @@ public class AccountActivity extends AppCompatActivity {
         binding.ivAccountImageAccountActivity.setOnClickListener(view -> {
             takePhoto.launch("image/*");
         });
+
+        tts = new TextToSpeech(getApplicationContext(), i -> {
+            if (i != TextToSpeech.ERROR) {
+                tts.setLanguage(Locale.getDefault());
+            }
+        });
     }
 
-    private void saveIMG(){
+    private void saveIMG() {
         binding.pbAccount.setVisibility(View.VISIBLE);
-        if(imageUri != null)
-        {
+        if (imageUri != null) {
             //Ścieżka gdzie ma być w Cloud Storage zapisywany obrazek
             StorageReference filepath = storageReference.child("foodapp_images")
                     .child("myImage" + Timestamp.now().getSeconds());
@@ -141,11 +136,10 @@ public class AccountActivity extends AppCompatActivity {
                         });
 
 
-                    }).addOnFailureListener(e -> Toast.makeText(AccountActivity.this,"Loading image into database went wrong",Toast.LENGTH_SHORT).show())).addOnFailureListener(e -> Toast.makeText(AccountActivity.this,"Uri is empty",Toast.LENGTH_SHORT).show());
+                    }).addOnFailureListener(e -> Toast.makeText(AccountActivity.this, "Loading image into database went wrong", Toast.LENGTH_SHORT).show())).addOnFailureListener(e -> Toast.makeText(AccountActivity.this, "Uri is empty", Toast.LENGTH_SHORT).show());
         }
         binding.pbAccount.setVisibility(View.INVISIBLE);
     }
-
 
 
     @Override
@@ -154,16 +148,17 @@ public class AccountActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_speak:
-                if( currentUser != null && auth != null){
-//                    startActivity(new Intent(com.example.foodapp.FoodListActivity.this, Ac.class));
+                if (currentUser != null && auth != null) {
+                    tts.speak(getString(R.string.accountActivityHint), TextToSpeech.QUEUE_FLUSH, null);
                 }
                 break;
             case R.id.action_signout:
-                if( currentUser != null && auth != null){
+                if (currentUser != null && auth != null) {
                     auth.signOut();
                 }
                 startActivity(new Intent(this, MainActivity.class));

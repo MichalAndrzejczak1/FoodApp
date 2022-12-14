@@ -3,6 +3,7 @@ package com.example.foodapp;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import Model.Order;
 import UI.OrderRecyclerAdapter;
@@ -40,6 +42,8 @@ public class FoodListActivity extends AppCompatActivity {
 
     private List<Order> orderList = new ArrayList<>();
     private OrderRecyclerAdapter orderRecyclerAdapter;
+
+    TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,12 @@ public class FoodListActivity extends AppCompatActivity {
         binding.ivListOfOrders.setOnClickListener(view -> startActivity(new Intent(FoodListActivity.this, FoodListActivity.class)));
         binding.ivAccount.setOnClickListener(view -> startActivity(new Intent(FoodListActivity.this, AccountActivity.class)));
         binding.ivSettings.setOnClickListener(view -> startActivity(new Intent(FoodListActivity.this, SettingsActivity.class)));
+
+        tts = new TextToSpeech(getApplicationContext(), i -> {
+            if (i != TextToSpeech.ERROR) {
+                tts.setLanguage(Locale.getDefault());
+            }
+        });
     }
 
     @Override
@@ -67,12 +77,13 @@ public class FoodListActivity extends AppCompatActivity {
     }
 
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_speak:
                 if( currentUser != null && auth != null){
-//                    startActivity(new Intent(com.example.foodapp.FoodListActivity.this, Ac.class));
+                    tts.speak(getString(R.string.foodListActivityHint), TextToSpeech.QUEUE_FLUSH, null);
                 }
                 break;
             case R.id.action_signout:

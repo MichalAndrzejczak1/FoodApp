@@ -12,228 +12,206 @@
         android:layout_height="match_parent"
         tools:context=".AccountActivity">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <TextView
+            android:id="@+id/tvHasloKontaText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/tu_haslokonta"
+            app:layout_constraintBottom_toBottomOf="@+id/ivHasloKontaObrazek"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivHasloKontaObrazek"
+            app:layout_constraintTop_toBottomOf="@+id/tvHasloKonta" />
+
+        <TextView
+            android:id="@+id/tvNazwaKontaText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/tu_emailkonta"
+            app:layout_constraintBottom_toBottomOf="@+id/ivNazwaKontaObrazek"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivNazwaKontaObrazek"
+            app:layout_constraintTop_toBottomOf="@+id/tvNazwaKonta" />
+
+        <TextView
+            android:id="@+id/tvEmailKonta"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/email"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toTopOf="@+id/tvEmailKontaText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivEmailKontaObrazek"
+            app:layout_constraintTop_toTopOf="@+id/ivEmailKontaObrazek" />
+
+        <TextView
+            android:id="@+id/tvEmailKontaText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/tu_emailkonta"
+            app:layout_constraintBottom_toBottomOf="@+id/ivEmailKontaObrazek"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivEmailKontaObrazek"
+            app:layout_constraintTop_toBottomOf="@+id/tvEmailKonta" />
+
+        <TextView
+            android:id="@+id/tvHasloKonta"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/password"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toTopOf="@+id/tvHasloKontaText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivHasloKontaObrazek"
+            app:layout_constraintTop_toTopOf="@+id/ivHasloKontaObrazek" />
+
+        <TextView
+            android:id="@+id/tvSrodkiKontaText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/tu_srodkikonta"
+            app:layout_constraintBottom_toBottomOf="@+id/ivSrodkiKontaObrazek"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivSrodkiKontaObrazek"
+            app:layout_constraintTop_toBottomOf="@+id/tvSrodkiKonta" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="3dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView2"
+                android:layout_width="0dp"
+                android:layout_height="249dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="347dp" />
 
-                <TextView
-                    android:id="@+id/tvEmailKonta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="@string/email"
-                    android:textSize="14sp"
-                    android:textStyle="bold|italic"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/ivEmailKontaObrazek"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.528" />
+            <ProgressBar
+                android:id="@+id/pbAccount"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="205dp"
+                android:layout_height="194dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.38" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <ImageView
-                    android:id="@+id/ivNazwaKontaObrazek"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/user_s_profile_picture"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.022"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.469"
-                    app:srcCompat="@drawable/ic_account" />
 
-                <TextView
-                    android:id="@+id/tvNazwaKontaText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tu_emailkonta"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.18"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.476" />
+        <ImageView
+            android:id="@+id/ivHasloKontaObrazek"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/password_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivEmailKontaObrazek"
+            app:srcCompat="@drawable/ic_haslo" />
 
-                <ImageView
-                    android:id="@+id/ivEmailKontaObrazek"
-                    android:layout_width="48dp"
-                    android:layout_height="50dp"
-                    android:contentDescription="@string/email_logo"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.022"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.552"
-                    app:srcCompat="@drawable/ic_email" />
+        <ImageView
+            android:id="@+id/ivSrodkiKontaObrazek"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/money_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivHasloKontaObrazek"
+            app:srcCompat="@drawable/ic_money" />
 
-                <TextView
-                    android:id="@+id/tvNazwaKonta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:layout_marginEnd="264dp"
-                    android:text="@string/name"
-                    android:textSize="14sp"
-                    android:textStyle="bold|italic"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.018"
-                    app:layout_constraintStart_toEndOf="@+id/ivNazwaKontaObrazek"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.449" />
+        <ImageView
+            android:id="@+id/ivEmailKontaObrazek"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/email_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivNazwaKontaObrazek"
+            app:srcCompat="@drawable/ic_email" />
 
-                <TextView
-                    android:id="@+id/tvEmailKontaText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tu_emailkonta"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/ivEmailKontaObrazek"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.56" />
+        <TextView
+            android:id="@+id/tvNazwaKonta"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/name"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toTopOf="@+id/tvNazwaKontaText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivNazwaKontaObrazek"
+            app:layout_constraintTop_toTopOf="@+id/ivNazwaKontaObrazek" />
 
-                <TextView
-                    android:id="@+id/tvHasloKontaText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tu_haslokonta"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/ivHasloKontaObrazek"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.64" />
+        <TextView
+            android:id="@+id/tvSrodkiKonta"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/money"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toTopOf="@+id/tvSrodkiKontaText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivSrodkiKontaObrazek"
+            app:layout_constraintTop_toTopOf="@+id/ivSrodkiKontaObrazek" />
 
-                <ImageView
-                    android:id="@+id/ivHasloKontaObrazek"
-                    android:layout_width="48dp"
-                    android:layout_height="50dp"
-                    android:contentDescription="@string/password_icon"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.022"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.634"
-                    app:srcCompat="@drawable/ic_haslo" />
-
-                <TextView
-                    android:id="@+id/tvHasloKonta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/password"
-                    android:textSize="14sp"
-                    android:textStyle="bold|italic"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.028"
-                    app:layout_constraintStart_toEndOf="@+id/ivHasloKontaObrazek"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.606" />
-
-                <ImageView
-                    android:id="@+id/ivSrodkiKontaObrazek"
-                    android:layout_width="48dp"
-                    android:layout_height="50dp"
-                    android:contentDescription="@string/money_icon"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.022"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.72"
-                    app:srcCompat="@drawable/ic_money" />
-
-                <TextView
-                    android:id="@+id/tvSrodkiKontaText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tu_srodkikonta"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/ivSrodkiKontaObrazek"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.72" />
-
-                <TextView
-                    android:id="@+id/tvSrodkiKonta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/money"
-                    android:textSize="14sp"
-                    android:textStyle="bold|italic"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.028"
-                    app:layout_constraintStart_toEndOf="@+id/ivSrodkiKontaObrazek"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.689" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_editor_absoluteX="3dp">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerView2"
-                        android:layout_width="0dp"
-                        android:layout_height="249dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        tools:ignore="MissingConstraints"
-                        tools:layout_editor_absoluteY="347dp" />
-
-                    <ProgressBar
-                        android:id="@+id/pbAccount"
-                        style="?android:attr/progressBarStyle"
-                        android:layout_width="205dp"
-                        android:layout_height="194dp"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.38" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/ivNazwaKontaObrazek"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/user_s_profile_picture"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivAccountImageAccountActivity"
+            app:srcCompat="@drawable/ic_account" />
 
         <TextView
             android:id="@+id/tvYourAccount"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:text="@string/your_account"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/ivAccountImageAccountActivity"
+            android:textAlignment="center"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/ivAccountImageAccountActivity"
-            android:layout_width="148dp"
-            android:layout_height="166dp"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="16dp"
             android:contentDescription="@string/user_profile_picture"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.093"
+            app:layout_constraintTop_toBottomOf="@+id/tvYourAccount"
             app:srcCompat="@drawable/ic_accountimage" />
 
 
@@ -241,11 +219,11 @@
             android:id="@+id/coordinatorLayout"
             android:layout_width="match_parent"
             android:layout_height="100dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView4"
-            app:layout_constraintVertical_bias="1.0">
+            app:layout_constraintTop_toBottomOf="@+id/ivSrodkiKontaObrazek">
 
             <com.google.android.material.bottomappbar.BottomAppBar
                 android:id="@+id/app_bar"
