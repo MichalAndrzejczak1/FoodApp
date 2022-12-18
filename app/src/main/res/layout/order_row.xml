@@ -19,6 +19,7 @@
     </data>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cvMainLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -29,45 +30,64 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/tv_OrderTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:paddingBottom="10dp"
+                android:text="Its title"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
             <ImageView
                 android:id="@+id/iv_orderImageList"
+                android:layout_width="150px"
+                android:layout_height="150px"
+                android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:cropToPadding="true"
                 android:scaleType="fitXY"
-                android:src="@{url}"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:src="@{url}" />
 
             <TextView
-                android:id="@+id/tv_OrderTitle"
-                android:text="Its title"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:padding="10dp"
-                android:paddingBottom="10dp"
+                android:id="@+id/tvOrderTotalPrice"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/tvOrderCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="TextView" />
 
             <TextView
                 android:id="@+id/tv_OrderDescription"
-                android:text="@{model.description}"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:paddingStart="10dp"
-                android:paddingBottom="10dp"
                 android:paddingTop="15dp"
                 android:paddingEnd="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:paddingBottom="10dp"
+                android:text=""
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_OrderTimestamp"
-                android:text="@{timestamp}"
-                android:textStyle="italic"
-                android:padding="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@{timestamp}"
+                android:textStyle="italic" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

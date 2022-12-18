@@ -1,18 +1,15 @@
 package com.example.foodapp;
 
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,32 +17,25 @@ import android.widget.Toast;
 
 
 import com.example.foodapp.databinding.ActivityAccountBinding;
-import com.example.foodapp.databinding.ActivityOrderingBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-import com.google.firestore.v1.WriteResult;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import Model.Order;
 import Model.User;
+//import UI.OrderRecyclerAdapter;
 
 public class AccountActivity extends AppCompatActivity {
     ActivityAccountBinding binding;
@@ -58,6 +48,9 @@ public class AccountActivity extends AppCompatActivity {
 
     ActivityResultLauncher<String> takePhoto;
 
+
+    private List<User> userList = new ArrayList<>();
+
     private StorageReference storageReference;
     private Uri imageUri;
     private CollectionReference collectionReference = db.collection("Users");
@@ -65,6 +58,18 @@ public class AccountActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Shared preferences
+        SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        //Setting theme before calling onCreate method.
+        boolean value = sharedPreferences.getBoolean("nightTheme", false);
+        if (!value) {
+            setTheme(R.style.Theme_Day);
+        } else {
+            setTheme(R.style.Theme_Night);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
@@ -80,7 +85,7 @@ public class AccountActivity extends AppCompatActivity {
             saveIMG();
         });
 
-        collectionReference.whereEqualTo("userId", FoodApi.getInstance()
+        collectionReference.whereEqualTo("userId", OrderApi.getInstance()
                         .getUserId())
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
@@ -89,7 +94,7 @@ public class AccountActivity extends AppCompatActivity {
                             User user = users.toObject(User.class);
                             binding.tvEmailKontaText.setText(auth.getCurrentUser().getEmail());
                             binding.tvNazwaKontaText.setText(user.getUsername());
-                            binding.tvSrodkiKontaText.setText(user.getMoney());
+                            binding.tvSrodkiKontaText.setText(user.getMoney().toString());
                             binding.tvHasloKontaText.setText(user.getPassword());
                             Picasso.get()
                                     .load(Uri.parse(user.getImageURL()))
@@ -108,6 +113,34 @@ public class AccountActivity extends AppCompatActivity {
         binding.ivAccountImageAccountActivity.setOnClickListener(view -> {
             takePhoto.launch("image/*");
         });
+
+        //Charge Button
+        binding.btnDoladuj.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(AccountActivity.this,"It may take some time...",Toast.LENGTH_SHORT).show();
+                binding.pbAccount.setVisibility(View.VISIBLE);
+
+                //// Wyłuskiwanie dokumentu korzystając z query
+                Query query = collectionReference.whereEqualTo("userId", auth.getUid());
+                query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Uaktualnianie URL użytkownika
+                                db.collection("Users")
+                                        .document(document.getId())
+                                        .update("money", "500");
+                                Toast.makeText(AccountActivity.this,"Recharging completed",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
+                binding.pbAccount.setVisibility(View.INVISIBLE);
+            }
+        });
+
     }
 
     private void saveIMG(){
@@ -123,7 +156,6 @@ public class AccountActivity extends AppCompatActivity {
                     .addOnSuccessListener(taskSnapshot -> filepath.getDownloadUrl().addOnSuccessListener(uri -> {
                         String imageURl = uri.toString();
 
-
                         //// Wyłuskiwanie dokumentu korzystając z query
                         Query query = collectionReference.whereEqualTo("userId", auth.getUid());
                         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -135,6 +167,7 @@ public class AccountActivity extends AppCompatActivity {
                                         db.collection("Users")
                                                 .document(document.getId())
                                                 .update("imageURL", imageURl);
+                                        Toast.makeText(AccountActivity.this,"Loading image into database done",Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
@@ -171,5 +204,16 @@ public class AccountActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStop() {
+
+        SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
+        boolean value = sharedPreferences.getBoolean("logout", false);
+        if( value){
+            auth.signOut();
+        }
+        super.onStop();
     }
 }

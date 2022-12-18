@@ -5,29 +5,41 @@ import com.google.firebase.Timestamp;
 public class Order {
     private String title;
     private String description;
-    private String imageURL;
     private String userId;
+    private int count;
+    private double tPrice;
+    private int categoryNumber;
+    private int productNumber;
     private Timestamp timeAdded;
-    private String username;
 
     public Order() {      //For firestore
     }
 
-    public Order(String title, String description, String imageURL, String userId, Timestamp timeAdded, String username) {
+    public Order(String title, String description, String userId, int count, double tPrice, int categoryNumber, int productNumber, Timestamp timeAdded) {
         this.title = title;
         this.description = description;
-        this.imageURL = imageURL;
         this.userId = userId;
+        this.count = count;
+        this.tPrice = tPrice;
+        this.categoryNumber = categoryNumber;
+        this.productNumber = productNumber;
         this.timeAdded = timeAdded;
-        this.username = username;
     }
 
-    public String getTitle() {
-        return title;
+    public int getCategoryNumber() {
+        return categoryNumber;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setCategoryNumber(int categoryNumber) {
+        this.categoryNumber = categoryNumber;
+    }
+
+    public int getProductNumber() {
+        return productNumber;
+    }
+
+    public void setProductNumber(int productNumber) {
+        this.productNumber = productNumber;
     }
 
     public String getDescription() {
@@ -38,12 +50,20 @@ public class Order {
         this.description = description;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public double gettPrice() {
+        return tPrice;
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public void settPrice(double tPrice) {
+        this.tPrice = tPrice;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getUserId() {
@@ -62,11 +82,11 @@ public class Order {
         this.timeAdded = timeAdded;
     }
 
-    public String getUsername() {
-        return username;
+    public int getCount() {
+        return count;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setCount(int count) {
+        this.count = count;
     }
 }

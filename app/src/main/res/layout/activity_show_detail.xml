@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ShowDetailActivity">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinatorLayout"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView4"
+            app:layout_constraintVertical_bias="1.0">
+
+<!--            <com.google.android.material.bottomappbar.BottomAppBar-->
+<!--                android:id="@+id/app_bar"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="bottom"-->
+<!--                android:backgroundTint="#f6f6f6"-->
+<!--                app:fabCradleMargin="8dp"-->
+<!--                app:fabCradleRoundedCornerRadius="50dp"-->
+<!--                app:fabCradleVerticalOffset="6dp"-->
+<!--                tools:layout_editor_absoluteX="0dp"-->
+<!--                tools:layout_editor_absoluteY="0dp">-->
+
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent">-->
+
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/homeBtn"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_weight="0.2"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/ivOrderFood"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_margin="10px"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:background="#F3DB0E"-->
+<!--                            android:backgroundTint="#F39B04"-->
+<!--                            app:srcCompat="@drawable/ic_foodlist" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/tvOrderYourFood"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Order Food"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textColor="#676767"-->
+<!--                            android:textSize="16sp"-->
+<!--                            android:textStyle="bold|italic"></TextView>-->
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/BtnListOfOrders"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_weight="0.2"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/ivListOfOrders"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_margin="10px"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:background="#F3DB0E"-->
+<!--                            android:backgroundTint="#F39B04"-->
+<!--                            app:srcCompat="@drawable/ic_listoforders" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/tvYourOrders"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Your orders"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textColor="#676767"-->
+<!--                            android:textSize="16sp"-->
+<!--                            android:textStyle="bold|italic"></TextView>-->
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/BtnAcc"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_weight="0.2"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/ivAccount"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_margin="10px"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:background="#F3DB0E"-->
+<!--                            android:backgroundTint="#F39B04"-->
+<!--                            app:srcCompat="@drawable/ic_account" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/tvAccount"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Account"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textColor="#676767"-->
+<!--                            android:textSize="16sp"-->
+<!--                            android:textStyle="bold|italic"></TextView>-->
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/BtnSettings"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_weight="0.2"-->
+<!--                        android:orientation="vertical">-->
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/ivSettings"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_margin="10px"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:background="#F3DB0E"-->
+<!--                            android:backgroundTint="#F39B04"-->
+<!--                            app:srcCompat="@drawable/ic_settings" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/tvSettings"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Settings"-->
+<!--                            android:textAlignment="center"-->
+<!--                            android:textColor="#676767"-->
+<!--                            android:textSize="16sp"-->
+<!--                            android:textStyle="bold|italic"></TextView>-->
+<!--                    </LinearLayout>-->
+<!--                </LinearLayout>-->
+<!--            </com.google.android.material.bottomappbar.BottomAppBar>-->
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <ScrollView
+            android:id="@+id/svShowActivity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/llShowActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvTitleShowDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:padding="4px"
+                    android:text="Title"
+                    android:textAlignment="center"
+                    android:textColor="#373b54"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvPriceShowDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="2px"
+                    android:text="$"
+                    android:textAlignment="center"
+                    android:textColor="#ff5e00"
+                    android:textSize="24sp" />
+
+                <ImageView
+                    android:id="@+id/ivProductShowDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="2px"
+                    app:srcCompat="@drawable/burger4" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/ivMinus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/minus" />
+
+                        <TextView
+                            android:id="@+id/tvCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_weight="1"
+                            android:text="1"
+                            android:textAlignment="center"
+                            android:textColor="#0B0101"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/ivPlus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/plus" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tvDescriptionStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Description"
+                    android:textColor="#0C0000"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp" />
+
+                <Button
+                    android:id="@+id/btnMakeOrder"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="MAKE ORDER"
+                    app:cornerRadius="40dp" />
+
+                <ProgressBar
+                    android:id="@+id/pbShowDetail"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:visibility="gone" />
+            </LinearLayout>
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

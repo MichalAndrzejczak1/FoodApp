@@ -2,10 +2,10 @@ package com.example.foodapp;
 
 import android.app.Application;
 
-public class FoodApi extends Application {
+public class OrderApi extends Application {
     private String username;
     private String userId;
-    private static FoodApi instance;
+    private static OrderApi instance;
 
     public String getUsername() {
         return username;
@@ -24,11 +24,11 @@ public class FoodApi extends Application {
     }
 
 
-    public FoodApi(){}
+    public OrderApi(){}
 
-    public static FoodApi getInstance(){
+    public static OrderApi getInstance(){
         if(instance == null)
-            instance = new FoodApi();
+            instance = new OrderApi();
 
         return instance;
     };

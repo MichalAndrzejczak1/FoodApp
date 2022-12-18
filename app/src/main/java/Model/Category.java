@@ -1,6 +1,9 @@
 package Model;
 
-public class Category {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Category implements Parcelable {
     private String title;
     private String pic;
 
@@ -23,5 +26,15 @@ public class Category {
 
     public void setPic(String pic) {
         this.pic = pic;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
     }
 }

@@ -95,8 +95,10 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerView"
                         android:layout_width="0dp"
-                        android:layout_height="174dp"
+                        android:layout_height="80dp"
                         android:layout_marginBottom="24dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
                         app:layout_constraintBottom_toTopOf="@+id/tvProducts"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -105,8 +107,9 @@
                         app:layout_constraintVertical_bias="0.060000002" />
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView2"
                         android:layout_width="0dp"
-                        android:layout_height="249dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -258,21 +261,6 @@
             </com.google.android.material.bottomappbar.BottomAppBar>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="88dp"
-            android:backgroundTint="#ff5e00"
-            android:elevation="3dp"
-            android:src="@drawable/ic_shopping_cart"
-            app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView4"
-            app:layout_constraintVertical_bias="0.0">
-
-        </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

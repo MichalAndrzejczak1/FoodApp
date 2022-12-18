@@ -1,7 +1,7 @@
 package com.example.foodapp;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,13 +14,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.foodapp.databinding.ActivityFoodListBinding;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,13 +34,24 @@ public class FoodListActivity extends AppCompatActivity {
     FirebaseUser currentUser;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private CollectionReference collectionReference = db.collection("Journal");
+    private CollectionReference collectionReference = db.collection("Orders");
 
     private List<Order> orderList = new ArrayList<>();
     private OrderRecyclerAdapter orderRecyclerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Shared preferences
+        SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
+
+        //Setting theme before calling onCreate method.
+        boolean value = sharedPreferences.getBoolean("nightTheme", false);
+        if (!value) {
+            setTheme(R.style.Theme_Day);
+        } else {
+            setTheme(R.style.Theme_Night);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_list);
 
@@ -50,14 +59,16 @@ public class FoodListActivity extends AppCompatActivity {
         currentUser = auth.getCurrentUser();
         binding = DataBindingUtil.setContentView(this, R.layout.activity_food_list);
 
-
-        binding.rvList.setHasFixedSize(true);
-        binding.rvList.setLayoutManager(new LinearLayoutManager(this));
-
         binding.ivOrderFood.setOnClickListener(view -> startActivity(new Intent(FoodListActivity.this, OrderingActivity.class)));
         binding.ivListOfOrders.setOnClickListener(view -> startActivity(new Intent(FoodListActivity.this, FoodListActivity.class)));
         binding.ivAccount.setOnClickListener(view -> startActivity(new Intent(FoodListActivity.this, AccountActivity.class)));
         binding.ivSettings.setOnClickListener(view -> startActivity(new Intent(FoodListActivity.this, SettingsActivity.class)));
+
+        binding.rvList.setHasFixedSize(true);
+        binding.rvList.setLayoutManager(new LinearLayoutManager(this));
+
+
+
     }
 
     @Override
@@ -91,26 +102,37 @@ public class FoodListActivity extends AppCompatActivity {
         super.onStart();
 
 
-        collectionReference.whereEqualTo("userId", FoodApi.getInstance()
+        collectionReference.whereEqualTo("userId", OrderApi.getInstance()
                     .getUserId())
                     .get()
                     .addOnSuccessListener(queryDocumentSnapshots -> {
                         orderList.clear();
                         if(!queryDocumentSnapshots.isEmpty()){
-                            for (QueryDocumentSnapshot journals : queryDocumentSnapshots){
-                                Order order = journals.toObject(Order.class);
+                            for (QueryDocumentSnapshot orderS : queryDocumentSnapshots){
+                                Order order = orderS.toObject(Order.class);
                                 orderList.add(order);
                             }
 
                             OrderRecyclerAdapter myRecyclerViewAdapter = new OrderRecyclerAdapter(FoodListActivity.this, orderList);
                             binding.setMyAdapter(myRecyclerViewAdapter);
-                                orderRecyclerAdapter = new OrderRecyclerAdapter(FoodListActivity.this, orderList);
-                                binding.rvList.setAdapter(orderRecyclerAdapter);
-                                orderRecyclerAdapter.notifyDataSetChanged();
+                            orderRecyclerAdapter = new OrderRecyclerAdapter(FoodListActivity.this, orderList);
+                            binding.rvList.setAdapter(orderRecyclerAdapter);
+                            orderRecyclerAdapter.notifyDataSetChanged();
 
                         }else {
                             binding.tvListNoEntry.setVisibility(View.VISIBLE);
                         }
                     }).addOnFailureListener(e -> Toast.makeText(com.example.foodapp.FoodListActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show());
+    }
+
+    @Override
+    protected void onStop() {
+
+        SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
+        boolean value = sharedPreferences.getBoolean("logout", false);
+        if( value){
+            auth.signOut();
+        }
+        super.onStop();
     }
 }

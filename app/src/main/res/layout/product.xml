@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:background="@drawable/cat_background">
+
+        <TextView
+            android:id="@+id/tvTitleProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Title"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/ivProduct"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.0"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/ivProduct"
+            app:layout_constraintStart_toStartOf="@+id/ivProduct"
+            app:layout_constraintTop_toBottomOf="@+id/ivProduct" />
+
+        <TextView
+            android:id="@+id/tvS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$"
+            android:textColor="@android:color/holo_red_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvPrice"
+            app:layout_constraintTop_toTopOf="@+id/tvPrice" />
+
+        <ImageView
+            android:id="@+id/ivProduct"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="22dp"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/cat_1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
