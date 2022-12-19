@@ -1,12 +1,17 @@
 package com.example.foodapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,6 +22,8 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.util.Locale;
+
 public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding binding;
     FirebaseAuth auth;
@@ -24,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseUser currentUser;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collectionReference = db.collection("Users");
+
+    TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +60,13 @@ public class LoginActivity extends AppCompatActivity {
             loginEmailPasswordUser(binding.etEmail.getText().toString().trim(),
                     binding.etPassword.getText().toString().trim());
         });
+
+        tts = new TextToSpeech(LoginActivity.this, i -> {
+            if (i != TextToSpeech.ERROR) {
+                tts.setLanguage(Locale.getDefault());
+            }
+        });
+
     }
 
     private void loginEmailPasswordUser(String email, String password) {
@@ -90,6 +106,29 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, "Please enter email and password", Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_speak:
+                if (currentUser != null && auth != null) {
+                    tts.speak(getString(R.string.loginActivityHint), TextToSpeech.QUEUE_FLUSH, null);
+                }
+                break;
+            case R.id.action_signout:
+                Toast.makeText(LoginActivity.this, R.string.sign_out_before_login_toast,  Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     protected void onStop() {
 

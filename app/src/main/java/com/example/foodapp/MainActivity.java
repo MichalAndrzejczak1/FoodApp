@@ -1,9 +1,15 @@
 package com.example.foodapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -14,6 +20,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.util.Locale;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseFirestore db =  FirebaseFirestore.getInstance();
     private CollectionReference collectionReference = db.collection("Users");
+
+    TextToSpeech tts;
 
 
     @Override
@@ -82,6 +91,33 @@ public class MainActivity extends AppCompatActivity {
         binding.btnGetStarted.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         });
+
+        tts = new TextToSpeech(MainActivity.this, i -> {
+            if (i != TextToSpeech.ERROR) {
+                tts.setLanguage(Locale.getDefault());
+            }
+        });
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_speak:
+                tts.speak(getString(R.string.mainActivityHint), TextToSpeech.QUEUE_FLUSH, null);
+                break;
+            case R.id.action_signout:
+                Toast.makeText(MainActivity.this, R.string.sign_out_on_main_activity_toast, Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

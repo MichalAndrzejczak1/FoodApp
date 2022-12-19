@@ -9,8 +9,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -33,6 +36,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
+import java.util.Locale;
 
 import Model.Order;
 import Model.User;
@@ -55,6 +59,8 @@ public class ShowDetailActivity extends AppCompatActivity {
 
     private CollectionReference collectionReference = db.collection("Users");
     private final CollectionReference collectionReference2 = db.collection("Orders");
+
+    TextToSpeech tts;
 
 
     @Override
@@ -333,8 +339,39 @@ public class ShowDetailActivity extends AppCompatActivity {
 
             }
         });
+
+        tts = new TextToSpeech(ShowDetailActivity.this, i -> {
+            if (i != TextToSpeech.ERROR) {
+                tts.setLanguage(Locale.getDefault());
+            }
+        });
+
     }
     //End of onCreate
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_speak:
+                tts.speak(getString(R.string.show_detail_activity_hint), TextToSpeech.QUEUE_FLUSH, null);
+                break;
+            case R.id.action_signout:
+                if( currentUser != null && auth != null){
+                    auth.signOut();
+                }
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 
 }
