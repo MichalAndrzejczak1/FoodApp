@@ -118,9 +118,7 @@ public class LoginActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_speak:
-                if (currentUser != null && auth != null) {
-                    tts.speak(getString(R.string.loginActivityHint), TextToSpeech.QUEUE_FLUSH, null);
-                }
+                tts.speak(getString(R.string.loginActivityHint), TextToSpeech.QUEUE_FLUSH, null);
                 break;
             case R.id.action_signout:
                 Toast.makeText(LoginActivity.this, R.string.sign_out_before_login_toast,  Toast.LENGTH_SHORT).show();

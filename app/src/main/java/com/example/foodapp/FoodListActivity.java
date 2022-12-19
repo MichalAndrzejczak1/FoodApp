@@ -92,8 +92,7 @@ public class FoodListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_speak:
-                if( currentUser != null && auth != null){
-                    tts.speak(getString(R.string.foodListActivityHint), TextToSpeech.QUEUE_FLUSH, null);                }
+                tts.speak(getString(R.string.foodListActivityHint), TextToSpeech.QUEUE_FLUSH, null);
                 break;
             case R.id.action_signout:
                 if( currentUser != null && auth != null){

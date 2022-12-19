@@ -160,9 +160,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_speak:
-                if (currentUser != null && auth != null) {
-                    tts.speak(getString(R.string.createAccountActivityHint), TextToSpeech.QUEUE_FLUSH, null);
-                }
+                tts.speak(getString(R.string.createAccountActivityHint), TextToSpeech.QUEUE_FLUSH, null);
                 break;
             case R.id.action_signout:
                 Toast.makeText(CreateAccountActivity.this, R.string.sign_out_before_account_creation_toast, Toast.LENGTH_SHORT).show();
