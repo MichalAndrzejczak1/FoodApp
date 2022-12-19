@@ -96,14 +96,14 @@ public class LoginActivity extends AppCompatActivity {
                         });
             }).addOnFailureListener(e -> {
                 binding.loginProgress.setVisibility(View.GONE);
-                Toast.makeText(LoginActivity.this, "Email and/or password are incorrect", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, getString(R.string.email_andor_password_are_incorrect), Toast.LENGTH_SHORT).show();
 
             });
 
         }
         else {
             binding.loginProgress.setVisibility(View.GONE);
-            Toast.makeText(LoginActivity.this, "Please enter email and password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, getString(R.string.please_enter_email_and_password), Toast.LENGTH_SHORT).show();
         }
     }
 

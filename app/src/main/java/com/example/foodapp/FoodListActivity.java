@@ -130,7 +130,7 @@ public class FoodListActivity extends AppCompatActivity {
                         }else {
                             binding.tvListNoEntry.setVisibility(View.VISIBLE);
                         }
-                    }).addOnFailureListener(e -> Toast.makeText(com.example.foodapp.FoodListActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show());
+                    }).addOnFailureListener(e -> Toast.makeText(com.example.foodapp.FoodListActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show());
     }
 
     @Override

@@ -112,7 +112,7 @@ public class OrderingActivity extends AppCompatActivity {
                         }else {
                         }
                     }
-                }).addOnFailureListener(e -> Toast.makeText(OrderingActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show());
+                }).addOnFailureListener(e -> Toast.makeText(OrderingActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show());
 
 //            Klasa odpowiadająca za 2 recyclerViewy
             recyclerViewCategory();
@@ -148,40 +148,40 @@ public class OrderingActivity extends AppCompatActivity {
 
         //Arrays for products
         ArrayList<Product> pizzas = new ArrayList<>();
-        pizzas.add(new Product("Small Pizza","pizza1","Small, but very tasty.",5.70));
-        pizzas.add(new Product("Italian Pizza","pizza2","For those who appreciate bland dishes. ",3.70));
-        pizzas.add(new Product("Super Spicy Pizza","pizza3","Spicy as a dragon's breath.",8.70));
-        pizzas.add(new Product("Salami Pizza","pizza4","Pizza with meat.",1.70));
-        pizzas.add(new Product("Pizza with mushrooms","pizza5","WhY dO I fEeL sO sTrAnGe?",2.70));
+        pizzas.add(new Product(getString(R.string.small_pizza),"pizza1",getString(R.string.small_but_very_tasty),5.70));
+        pizzas.add(new Product(getString(R.string.italian_pizza),"pizza2",getString(R.string.for_those_who_appreciate_bland_dishes),3.70));
+        pizzas.add(new Product(getString(R.string.super_spicy_pizza),"pizza3",getString(R.string.spicy_as_dragons_breath),8.70));
+        pizzas.add(new Product(getString(R.string.salami_pizza),"pizza4",getString(R.string.pizza_with_meat),1.70));
+        pizzas.add(new Product(getString(R.string.pizza_with_mushrooms),"pizza5",getString(R.string.why_do_i_feel_so_strange),2.70));
 
         adapter2 = new ProductRecyclerAdapter(this,pizzas);
 
 
         ArrayList<Product> burgers = new ArrayList<>();
-        burgers.add(new Product("Small Burger","burger1","Small but very tasty.",5.70));
-        burgers.add(new Product("Medium Burger","burger2","Medium-sized, tasty burger.",3.70));
-        burgers.add(new Product("BigBurger","burger3","Can replace a whole meal.",8.70));
-        burgers.add(new Product("Vege Burger","burger4","Tastes like a chicken",1.70));
-        burgers.add(new Product("Golden Burger","burger5","Expensive product for the richest",2.70));
+        burgers.add(new Product(getString(R.string.small_burger),"burger1",getString(R.string.small_but_very_tasty),5.70));
+        burgers.add(new Product(getString(R.string.medium_burger),"burger2",getString(R.string.medium_sized_tasty_burger),3.70));
+        burgers.add(new Product(getString(R.string.big_burger),"burger3",getString(R.string.can_replace_a_whole_meal),8.70));
+        burgers.add(new Product(getString(R.string.vege_burger),"burger4",getString(R.string.tastes_like_a_chicken),1.70));
+        burgers.add(new Product(getString(R.string.golden_burger),"burger5",getString(R.string.expensive_product_for_the_richest),2.70));
 
         ArrayList<Product> hotdogs = new ArrayList<>();
-        hotdogs.add(new Product("Hotdog with mustard","hotdog1","The cheapest hotdog.",1.70));
-        hotdogs.add(new Product("VegeDog","hotdog2","Tastes like meat but contains vegetables and bread.",3.70));
-        hotdogs.add(new Product("ChickenDog","hotdog3","Tastes like a chicken but cotains dog in its name.",8.70));
+        hotdogs.add(new Product(getString(R.string.hotdog_with_mustard),"hotdog1",getString(R.string.the_cheapest_hotdog),1.70));
+        hotdogs.add(new Product(getString(R.string.vege_dog),"hotdog2",getString(R.string.tastes_like_meat_but_contains_vegetables_and_bread),3.70));
+        hotdogs.add(new Product(getString(R.string.chicken_dog),"hotdog3",getString(R.string.tastes_like_a_chicken_but_contains_dog_in_its_name),8.70));
 
         ArrayList<Product> drinks = new ArrayList<>();
-        drinks.add(new Product("Premium Lemonade","drink1","Flavour of lemons.",5.70));
-        drinks.add(new Product("Coca Cola Zero","drink2","Very delicious but unhealthy.",3.70));
-        drinks.add(new Product("Water (1l)","drink3","Not mineralised.",8.70));
-        drinks.add(new Product("Milk","drink4","Cow milk",1.70));
-        drinks.add(new Product("Beer","drink5","Happy hour!",2.70));
+        drinks.add(new Product(getString(R.string.premium_lemonade),"drink1",getString(R.string.flavour_of_lemons),5.70));
+        drinks.add(new Product(getString(R.string.coca_cola_Zero),"drink2",getString(R.string.very_delicious_but_unhealthy),3.70));
+        drinks.add(new Product(getString(R.string.water_one_liter),"drink3",getString(R.string.not_mineralised),8.70));
+        drinks.add(new Product(getString(R.string.milk),"drink4",getString(R.string.cow_milk),1.70));
+        drinks.add(new Product(getString(R.string.beer),"drink5",getString(R.string.happy_hour),2.70));
 
         ArrayList<Product> donuts = new ArrayList<>();
-        donuts.add(new Product("Choconut","donut1","Donut with chocolate.",3.20));
-        donuts.add(new Product("Choconut with sprinkles","donut2","Donut with chocolate and sprinkles on top.",3.70));
-        donuts.add(new Product("Raspberrynut with sprinkles","donut3","Tastes like raspberries.",5.00));
-        donuts.add(new Product("Vanilla Donut with sprinkles","donut4","The cheapest but very good.",1.50));
-        donuts.add(new Product("Honeynut with icing","donut5","Heaven in your mouth.",4.50));
+        donuts.add(new Product(getString(R.string.choconut),"donut1",getString(R.string.donut_with_chocolate),3.20));
+        donuts.add(new Product(getString(R.string.choconut_with_sprinkles),"donut2",getString(R.string.donut_with_chocolate_and_sprinkles_on_top),3.70));
+        donuts.add(new Product(getString(R.string.rassberrynut_with_sprinkles),"donut3",getString(R.string.tastes_like_rasberries),5.00));
+        donuts.add(new Product(getString(R.string.vanilla_donut_with_sprinkles),"donut4",getString(R.string.the_cheapest_but_very_good),1.50));
+        donuts.add(new Product(getString(R.string.honeynut_with_icing),"donut5",getString(R.string.heaven_in_your_mouth),4.50));
 
 
         recyclerViewCategoryList2.setAdapter(adapter2);

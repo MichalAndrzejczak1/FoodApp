@@ -80,7 +80,7 @@ public class CreateAccountActivity extends AppCompatActivity {
          }else {
              Toast.makeText(
                      CreateAccountActivity.this,
-                     "Empty fields aren't allowed",
+                     getString(R.string.empt_fields_arent_allowed),
                      Toast.LENGTH_SHORT)
                      .show();
          }

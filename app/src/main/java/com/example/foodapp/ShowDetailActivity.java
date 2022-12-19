@@ -107,7 +107,7 @@ public class ShowDetailActivity extends AppCompatActivity {
                         }else {
                         }
                     }
-                }).addOnFailureListener(e -> Toast.makeText(ShowDetailActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show());
+                }).addOnFailureListener(e -> Toast.makeText(ShowDetailActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show());
 
 
         Bundle extras = getIntent().getExtras();
@@ -317,7 +317,7 @@ public class ShowDetailActivity extends AppCompatActivity {
                             public void onSuccess(DocumentReference documentReference) {
                                 binding.pbShowDetail.setVisibility(View.INVISIBLE);
                                 startActivity(new Intent(ShowDetailActivity.this, FoodListActivity.class));
-                                Toast.makeText(ShowDetailActivity.this, "Making order done!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ShowDetailActivity.this, getString(R.string.making_order_done), Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -330,7 +330,7 @@ public class ShowDetailActivity extends AppCompatActivity {
 
                     }
                     else {
-                        Toast.makeText(ShowDetailActivity.this, "Not enough money to make an order!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShowDetailActivity.this, getString(R.string.not_enough_money_to_order), Toast.LENGTH_SHORT).show();
                     }
 
 
