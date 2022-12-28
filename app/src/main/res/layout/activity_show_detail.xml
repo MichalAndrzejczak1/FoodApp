@@ -172,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="60dp"
                     android:padding="4px"
-                    android:text="@string/title"
+                    android:text="Title"
                     android:textAlignment="center"
                     android:textColor="#373b54"
                     android:textSize="24sp"
@@ -183,7 +183,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="2px"
-                    android:text="@string/dollar"
+                    android:text="$"
                     android:textAlignment="center"
                     android:textColor="#ff5e00"
                     android:textSize="24sp" />
@@ -192,7 +192,6 @@
                     android:id="@+id/ivProductShowDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/food_icon"
                     android:padding="2px"
                     app:srcCompat="@drawable/burger4" />
 
@@ -214,7 +213,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:contentDescription="@string/minus_icon"
                             app:srcCompat="@drawable/minus" />
 
                         <TextView
@@ -224,7 +222,7 @@
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="16dp"
                             android:layout_weight="1"
-                            android:text="@string/one"
+                            android:text="1"
                             android:textAlignment="center"
                             android:textColor="#0B0101"
                             android:textSize="18sp"
@@ -235,7 +233,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:contentDescription="@string/plus_icon"
                             app:srcCompat="@drawable/plus" />
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -245,7 +242,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/description"
+                    android:text="Description"
                     android:textColor="#0C0000"
                     android:textStyle="bold|italic" />
 
@@ -263,7 +260,7 @@
                     android:layout_margin="10dp"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:text="@string/make_order"
+                    android:text="MAKE ORDER"
                     app:cornerRadius="40dp" />
 
                 <ProgressBar

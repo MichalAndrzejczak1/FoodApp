@@ -56,14 +56,13 @@
                             android:layout_weight="1"
                             android:background="#F3DB0E"
                             android:backgroundTint="#F39B04"
-                            android:contentDescription="@string/order_food_icon"
                             app:srcCompat="@drawable/ic_foodlist" />
 
                         <TextView
                             android:id="@+id/tvOrderYourFood"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/order_food"
+                            android:text="Order Food"
                             android:textAlignment="center"
                             android:textColor="#676767"
                             android:textSize="16sp"
@@ -85,14 +84,13 @@
                             android:layout_weight="1"
                             android:background="#F3DB0E"
                             android:backgroundTint="#F39B04"
-                            android:contentDescription="@string/orderingActivityHint"
                             app:srcCompat="@drawable/ic_listoforders" />
 
                         <TextView
                             android:id="@+id/tvYourOrders"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/your_orders"
+                            android:text="Your orders"
                             android:textAlignment="center"
                             android:textColor="#676767"
                             android:textSize="16sp"
@@ -114,14 +112,13 @@
                             android:layout_weight="1"
                             android:background="#F3DB0E"
                             android:backgroundTint="#F39B04"
-                            android:contentDescription="@string/account_icon"
                             app:srcCompat="@drawable/ic_account" />
 
                         <TextView
                             android:id="@+id/tvAccount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/account"
+                            android:text="Account"
                             android:textAlignment="center"
                             android:textColor="#676767"
                             android:textSize="16sp"
@@ -143,14 +140,13 @@
                             android:layout_weight="1"
                             android:background="#F3DB0E"
                             android:backgroundTint="#F39B04"
-                            android:contentDescription="@string/settings_icon"
                             app:srcCompat="@drawable/ic_settings" />
 
                         <TextView
                             android:id="@+id/tvSettings"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/settings"
+                            android:text="Settings"
                             android:textAlignment="center"
                             android:textColor="#676767"
                             android:textSize="16sp"
@@ -169,10 +165,9 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:adapter="@{myAdapter}"
-            android:contentDescription="@string/food_list"
             app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
-
             app:layout_constraintEnd_toEndOf="parent"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.08" />
@@ -181,7 +176,7 @@
             android:id="@+id/tv_ListNoEntry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@string/no_orders_add_some_by_clicking_here'
+            android:text='No orders! Add some by clicking here!'
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/rv_List"
             app:layout_constraintEnd_toEndOf="@+id/rv_List"

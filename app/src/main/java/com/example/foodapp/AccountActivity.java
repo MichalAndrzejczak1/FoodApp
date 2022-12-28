@@ -6,12 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,7 +33,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import Model.User;
 //import UI.OrderRecyclerAdapter;
@@ -51,10 +48,6 @@ public class AccountActivity extends AppCompatActivity {
 
     ActivityResultLauncher<String> takePhoto;
 
-    TextToSpeech tts;
-
-
-    private List<User> userList = new ArrayList<>();
 
     private StorageReference storageReference;
     private Uri imageUri;
@@ -94,10 +87,10 @@ public class AccountActivity extends AppCompatActivity {
                         .getUserId())
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    if (!queryDocumentSnapshots.isEmpty()) {
-                        for (QueryDocumentSnapshot users : queryDocumentSnapshots) {
+                    if(!queryDocumentSnapshots.isEmpty()){
+                        for (QueryDocumentSnapshot users : queryDocumentSnapshots){
                             User user = users.toObject(User.class);
-                            binding.tvEmailKontaText.setText(auth.getCurrentUser().getEmail());
+                            binding.tvEmailKontaText.setText(user.getEmail());
                             binding.tvNazwaKontaText.setText(user.getUsername());
                             binding.tvSrodkiKontaText.setText(user.getMoney().toString());
                             binding.tvHasloKontaText.setText(user.getPassword());
@@ -109,7 +102,7 @@ public class AccountActivity extends AppCompatActivity {
                         }
 
                     }
-                }).addOnFailureListener(e -> Toast.makeText(AccountActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show());
+                }).addOnFailureListener(e -> Toast.makeText(AccountActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show());
 
         binding.ivOrderFood.setOnClickListener(view -> startActivity(new Intent(AccountActivity.this, OrderingActivity.class)));
         binding.ivListOfOrders.setOnClickListener(view -> startActivity(new Intent(AccountActivity.this, FoodListActivity.class)));
@@ -123,7 +116,7 @@ public class AccountActivity extends AppCompatActivity {
         binding.btnDoladuj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AccountActivity.this, getString(R.string.it_may_take_some_time), Toast.LENGTH_SHORT).show();
+                Toast.makeText(AccountActivity.this,"It may take some time...",Toast.LENGTH_SHORT).show();
                 binding.pbAccount.setVisibility(View.VISIBLE);
 
                 //// Wyłuskiwanie dokumentu korzystając z query
@@ -137,7 +130,7 @@ public class AccountActivity extends AppCompatActivity {
                                 db.collection("Users")
                                         .document(document.getId())
                                         .update("money", "500");
-                                Toast.makeText(AccountActivity.this, getString(R.string.recharging_completed), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AccountActivity.this,"Recharging completed",Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -146,17 +139,12 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
-        tts = new TextToSpeech(AccountActivity.this, i -> {
-            if (i != TextToSpeech.ERROR) {
-                tts.setLanguage(Locale.getDefault());
-            }
-        });
-
     }
 
-    private void saveIMG() {
+    private void saveIMG(){
         binding.pbAccount.setVisibility(View.VISIBLE);
-        if (imageUri != null) {
+        if(imageUri != null)
+        {
             //Ścieżka gdzie ma być w Cloud Storage zapisywany obrazek
             StorageReference filepath = storageReference.child("foodapp_images")
                     .child("myImage" + Timestamp.now().getSeconds());
@@ -177,17 +165,18 @@ public class AccountActivity extends AppCompatActivity {
                                         db.collection("Users")
                                                 .document(document.getId())
                                                 .update("imageURL", imageURl);
-                                        Toast.makeText(AccountActivity.this, getString(R.string.loading_image_into_database_done), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(AccountActivity.this,"Loading image into database done",Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
                         });
 
 
-                    }).addOnFailureListener(e -> Toast.makeText(AccountActivity.this, getString(R.string.loading_image_into_database_went_wrong), Toast.LENGTH_SHORT).show())).addOnFailureListener(e -> Toast.makeText(AccountActivity.this, "Uri is empty", Toast.LENGTH_SHORT).show());
+                    }).addOnFailureListener(e -> Toast.makeText(AccountActivity.this,"Loading image into database went wrong",Toast.LENGTH_SHORT).show())).addOnFailureListener(e -> Toast.makeText(AccountActivity.this,"Uri is empty",Toast.LENGTH_SHORT).show());
         }
         binding.pbAccount.setVisibility(View.INVISIBLE);
     }
+
 
 
     @Override
@@ -196,15 +185,16 @@ public class AccountActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
+        switch (item.getItemId()){
             case R.id.action_speak:
-                tts.speak(getString(R.string.accountActivityHint), TextToSpeech.QUEUE_FLUSH, null);
+                if( currentUser != null && auth != null){
+//                    startActivity(new Intent(com.example.foodapp.FoodListActivity.this, Ac.class));
+                }
                 break;
             case R.id.action_signout:
-                if (currentUser != null && auth != null) {
+                if( currentUser != null && auth != null){
                     auth.signOut();
                 }
                 startActivity(new Intent(this, MainActivity.class));
@@ -219,7 +209,7 @@ public class AccountActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
         boolean value = sharedPreferences.getBoolean("logout", false);
-        if (value) {
+        if( value){
             auth.signOut();
         }
         super.onStop();

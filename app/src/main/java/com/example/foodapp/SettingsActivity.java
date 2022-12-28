@@ -4,11 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,16 +19,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Locale;
-
 public class SettingsActivity extends AppCompatActivity {
     ActivitySettingsBinding binding;
 
     FirebaseAuth auth;
     FirebaseUser currentUser;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    TextToSpeech tts;
 
 
 
@@ -130,11 +124,6 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        tts = new TextToSpeech(SettingsActivity.this, i -> {
-            if (i != TextToSpeech.ERROR) {
-                tts.setLanguage(Locale.getDefault());
-            }
-        });
 
     }
 
@@ -144,12 +133,13 @@ public class SettingsActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_speak:
-                tts.speak(getString(R.string.settingsActivityHint), TextToSpeech.QUEUE_FLUSH, null);
+                if( currentUser != null && auth != null){
+//                    startActivity(new Intent(com.example.foodapp.FoodListActivity.this, Ac.class));
+                }
                 break;
             case R.id.action_signout:
                 if( currentUser != null && auth != null){
