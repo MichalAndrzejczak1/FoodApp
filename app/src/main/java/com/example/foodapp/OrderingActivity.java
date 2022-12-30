@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import Model.Category;
 import Model.Order;
@@ -64,6 +66,8 @@ public class OrderingActivity extends AppCompatActivity {
 
     private int activeCategoryNumber;
     private int activeProductNumber;
+
+    TextToSpeech tts;
 
 
 
@@ -128,6 +132,12 @@ public class OrderingActivity extends AppCompatActivity {
 
                 }).addOnFailureListener(e -> Toast.makeText(OrderingActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show());
 //            Klasa odpowiadająca za 2 recyclerViewy
+
+        tts = new TextToSpeech(OrderingActivity.this, i -> {
+            if (i != TextToSpeech.ERROR) {
+                tts.setLanguage(Locale.getDefault());
+            }
+        });
 
     }
 
@@ -215,15 +225,14 @@ public class OrderingActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_speak: {
-                if (currentUser != null && auth != null) {
-//                    startActivity(new Intent(com.example.foodapp.FoodListActivity.this, PostJournalActivity.class));
-                }
+                tts.speak(getString(R.string.orderingActivityHint), TextToSpeech.QUEUE_FLUSH, null);
             }
-            break;
+                break;
             case R.id.action_signout: {
                 if (currentUser != null && auth != null) {
                     auth.signOut();

@@ -6,10 +6,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +35,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import Model.User;
 //import UI.OrderRecyclerAdapter;
@@ -47,6 +50,8 @@ public class AccountActivity extends AppCompatActivity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
     ActivityResultLauncher<String> takePhoto;
+
+    TextToSpeech tts;
 
 
     private StorageReference storageReference;
@@ -102,7 +107,7 @@ public class AccountActivity extends AppCompatActivity {
                         }
 
                     }
-                }).addOnFailureListener(e -> Toast.makeText(AccountActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show());
+                }).addOnFailureListener(e -> Toast.makeText(AccountActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show());
 
         binding.ivOrderFood.setOnClickListener(view -> startActivity(new Intent(AccountActivity.this, OrderingActivity.class)));
         binding.ivListOfOrders.setOnClickListener(view -> startActivity(new Intent(AccountActivity.this, FoodListActivity.class)));
@@ -116,7 +121,7 @@ public class AccountActivity extends AppCompatActivity {
         binding.btnDoladuj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AccountActivity.this,"It may take some time...",Toast.LENGTH_SHORT).show();
+                Toast.makeText(AccountActivity.this, getString(R.string.it_may_take_some_time), Toast.LENGTH_SHORT).show();
                 binding.pbAccount.setVisibility(View.VISIBLE);
 
                 //// Wyłuskiwanie dokumentu korzystając z query
@@ -130,12 +135,18 @@ public class AccountActivity extends AppCompatActivity {
                                 db.collection("Users")
                                         .document(document.getId())
                                         .update("money", "500");
-                                Toast.makeText(AccountActivity.this,"Recharging completed",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AccountActivity.this, getString(R.string.recharging_completed), Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
                 });
                 binding.pbAccount.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        tts = new TextToSpeech(AccountActivity.this, i -> {
+            if (i != TextToSpeech.ERROR) {
+                tts.setLanguage(Locale.getDefault());
             }
         });
 
@@ -165,14 +176,14 @@ public class AccountActivity extends AppCompatActivity {
                                         db.collection("Users")
                                                 .document(document.getId())
                                                 .update("imageURL", imageURl);
-                                        Toast.makeText(AccountActivity.this,"Loading image into database done",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(AccountActivity.this, getString(R.string.loading_image_into_database_done), Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
                         });
 
 
-                    }).addOnFailureListener(e -> Toast.makeText(AccountActivity.this,"Loading image into database went wrong",Toast.LENGTH_SHORT).show())).addOnFailureListener(e -> Toast.makeText(AccountActivity.this,"Uri is empty",Toast.LENGTH_SHORT).show());
+                    }).addOnFailureListener(e -> Toast.makeText(AccountActivity.this, getString(R.string.loading_image_into_database_went_wrong), Toast.LENGTH_SHORT).show())).addOnFailureListener(e -> Toast.makeText(AccountActivity.this, "Uri is empty", Toast.LENGTH_SHORT).show());
         }
         binding.pbAccount.setVisibility(View.INVISIBLE);
     }
@@ -185,16 +196,15 @@ public class AccountActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_speak:
-                if( currentUser != null && auth != null){
-//                    startActivity(new Intent(com.example.foodapp.FoodListActivity.this, Ac.class));
-                }
+                tts.speak(getString(R.string.accountActivityHint), TextToSpeech.QUEUE_FLUSH, null);
                 break;
             case R.id.action_signout:
-                if( currentUser != null && auth != null){
+                if (currentUser != null && auth != null) {
                     auth.signOut();
                 }
                 startActivity(new Intent(this, MainActivity.class));
@@ -209,7 +219,7 @@ public class AccountActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
         boolean value = sharedPreferences.getBoolean("logout", false);
-        if( value){
+        if (value) {
             auth.signOut();
         }
         super.onStop();

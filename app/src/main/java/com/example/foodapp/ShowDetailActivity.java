@@ -5,14 +5,18 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.text.DecimalFormat;
 import android.icu.text.NumberFormat;
 import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -30,6 +34,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Date;
+import java.util.Locale;
 
 import Model.Order;
 import Model.User;
@@ -53,6 +58,7 @@ public class ShowDetailActivity extends AppCompatActivity {
     private CollectionReference collectionReference = db.collection("Users");
     private final CollectionReference collectionReference2 = db.collection("Orders");
 
+    TextToSpeech tts;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -88,7 +94,7 @@ public class ShowDetailActivity extends AppCompatActivity {
 
                     }else {
                     }
-                }).addOnFailureListener(e -> Toast.makeText(ShowDetailActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show());
+                }).addOnFailureListener(e -> Toast.makeText(ShowDetailActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show());
 
 
         Bundle extras = getIntent().getExtras();
@@ -169,7 +175,7 @@ public class ShowDetailActivity extends AppCompatActivity {
                     collectionReference2.add(order).addOnSuccessListener(documentReference -> {
                         binding.pbShowDetail.setVisibility(View.INVISIBLE);
                         startActivity(new Intent(ShowDetailActivity.this, FoodListActivity.class));
-                        Toast.makeText(ShowDetailActivity.this, "Making order done!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShowDetailActivity.this, getString(R.string.making_order_done), Toast.LENGTH_SHORT).show();
                         finish();
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -181,7 +187,7 @@ public class ShowDetailActivity extends AppCompatActivity {
 
                 }
                 else {
-                    Toast.makeText(ShowDetailActivity.this, "Not enough money to make an order!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ShowDetailActivity.this, getString(R.string.not_enough_money_to_order), Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -189,8 +195,39 @@ public class ShowDetailActivity extends AppCompatActivity {
             binding.pbShowDetail.setVisibility(View.INVISIBLE);
 
         });
+
+        tts = new TextToSpeech(ShowDetailActivity.this, i -> {
+            if (i != TextToSpeech.ERROR) {
+                tts.setLanguage(Locale.getDefault());
+            }
+        });
+
     }
     //End of onCreate
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_speak:
+                tts.speak(getString(R.string.show_detail_activity_hint), TextToSpeech.QUEUE_FLUSH, null);
+                break;
+            case R.id.action_signout:
+                if( currentUser != null && auth != null){
+                    auth.signOut();
+                }
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 
 }
