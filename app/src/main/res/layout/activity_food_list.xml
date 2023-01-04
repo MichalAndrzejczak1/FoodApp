@@ -20,16 +20,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.974">
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.bottomappbar.BottomAppBar
                 android:id="@+id/app_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="82dp"
                 android:layout_gravity="bottom"
-                android:backgroundTint="#f6f6f6"
+                android:backgroundTint="@color/material_dynamic_neutral_variant40"
                 app:fabCradleMargin="8dp"
                 app:fabCradleRoundedCornerRadius="50dp"
                 app:fabCradleVerticalOffset="6dp"
@@ -39,7 +37,9 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:baselineAligned="false">
 
                     <LinearLayout
                         android:id="@+id/homeBtn"
@@ -51,8 +51,8 @@
                         <ImageView
                             android:id="@+id/ivOrderFood"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10px"
+                            android:layout_height="0dp"
+                            android:layout_margin="3dp"
                             android:layout_weight="1"
                             android:background="#F3DB0E"
                             android:backgroundTint="#F39B04"
@@ -65,9 +65,9 @@
                             android:layout_height="wrap_content"
                             android:text="@string/order_food"
                             android:textAlignment="center"
-                            android:textColor="#676767"
-                            android:textSize="16sp"
-                            android:textStyle="bold|italic"></TextView>
+                            android:textColor="@color/white"
+                            android:textSize="11sp"
+                            android:textStyle="bold|italic" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -80,12 +80,12 @@
                         <ImageView
                             android:id="@+id/ivListOfOrders"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10px"
+                            android:layout_height="0dp"
+                            android:layout_margin="3dp"
                             android:layout_weight="1"
                             android:background="#F3DB0E"
                             android:backgroundTint="#F39B04"
-                            android:contentDescription="@string/orderingActivityHint"
+                            android:contentDescription="@string/no_orders_add_some_by_clicking_here"
                             app:srcCompat="@drawable/ic_listoforders" />
 
                         <TextView
@@ -94,9 +94,9 @@
                             android:layout_height="wrap_content"
                             android:text="@string/your_orders"
                             android:textAlignment="center"
-                            android:textColor="#676767"
-                            android:textSize="16sp"
-                            android:textStyle="bold|italic"></TextView>
+                            android:textColor="@color/white"
+                            android:textSize="10sp"
+                            android:textStyle="bold|italic" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -109,13 +109,13 @@
                         <ImageView
                             android:id="@+id/ivAccount"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10px"
+                            android:layout_height="0dp"
+                            android:layout_margin="3dp"
                             android:layout_weight="1"
                             android:background="#F3DB0E"
                             android:backgroundTint="#F39B04"
                             android:contentDescription="@string/account_icon"
-                            app:srcCompat="@drawable/ic_account" />
+                            app:srcCompat="@drawable/ic_account_black" />
 
                         <TextView
                             android:id="@+id/tvAccount"
@@ -123,9 +123,9 @@
                             android:layout_height="wrap_content"
                             android:text="@string/account"
                             android:textAlignment="center"
-                            android:textColor="#676767"
-                            android:textSize="16sp"
-                            android:textStyle="bold|italic"></TextView>
+                            android:textColor="@color/white"
+                            android:textSize="11sp"
+                            android:textStyle="bold|italic" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -138,8 +138,8 @@
                         <ImageView
                             android:id="@+id/ivSettings"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10px"
+                            android:layout_height="0dp"
+                            android:layout_margin="3dp"
                             android:layout_weight="1"
                             android:background="#F3DB0E"
                             android:backgroundTint="#F39B04"
@@ -152,9 +152,9 @@
                             android:layout_height="wrap_content"
                             android:text="@string/settings"
                             android:textAlignment="center"
-                            android:textColor="#676767"
-                            android:textSize="16sp"
-                            android:textStyle="bold|italic"></TextView>
+                            android:textColor="@color/white"
+                            android:textSize="11sp"
+                            android:textStyle="bold|italic" />
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.bottomappbar.BottomAppBar>

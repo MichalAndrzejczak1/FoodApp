@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:background="@color/transparent"
             android:text="@string/get_started"
-            android:textColor="#00838F" />
+            android:textColor="@android:color/holo_orange_dark" />
 
 
     </LinearLayout>

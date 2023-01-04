@@ -171,10 +171,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="60dp"
-                    android:padding="4px"
+                    android:padding="4dp"
                     android:text="@string/title"
                     android:textAlignment="center"
-                    android:textColor="#373b54"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -182,7 +181,7 @@
                     android:id="@+id/tvPriceShowDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="2px"
+                    android:padding="2dp"
                     android:text="@string/dollar"
                     android:textAlignment="center"
                     android:textColor="#ff5e00"
@@ -193,7 +192,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/food_icon"
-                    android:padding="2px"
+                    android:padding="2dp"
                     app:srcCompat="@drawable/burger4" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -226,7 +225,6 @@
                             android:layout_weight="1"
                             android:text="@string/one"
                             android:textAlignment="center"
-                            android:textColor="#0B0101"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
@@ -246,7 +244,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/description"
-                    android:textColor="#0C0000"
                     android:textStyle="bold|italic" />
 
                 <TextView
