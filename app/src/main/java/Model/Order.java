@@ -6,6 +6,7 @@ public class Order {
     private String title;
     private String description;
     private String userId;
+    private String picture;
     private int count;
     private double tPrice;
     private int categoryNumber;
@@ -15,7 +16,7 @@ public class Order {
     public Order() {      //For firestore
     }
 
-    public Order(String title, String description, String userId, int count, double tPrice, int categoryNumber, int productNumber, Timestamp timeAdded) {
+    public Order(String title, String description, String userId, String picture, int count, double tPrice, int categoryNumber, int productNumber, Timestamp timeAdded) {
         this.title = title;
         this.description = description;
         this.userId = userId;
@@ -24,6 +25,14 @@ public class Order {
         this.categoryNumber = categoryNumber;
         this.productNumber = productNumber;
         this.timeAdded = timeAdded;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public int getCategoryNumber() {

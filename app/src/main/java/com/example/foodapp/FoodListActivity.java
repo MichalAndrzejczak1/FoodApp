@@ -1,10 +1,8 @@
 package com.example.foodapp;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +22,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import Model.Order;
 import UI.OrderRecyclerAdapter;
@@ -33,7 +30,6 @@ public class FoodListActivity extends AppCompatActivity {
     ActivityFoodListBinding binding;
 
     FirebaseAuth auth;
-    FirebaseAuth.AuthStateListener authStateListener;
     FirebaseUser currentUser;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -41,8 +37,6 @@ public class FoodListActivity extends AppCompatActivity {
 
     private List<Order> orderList = new ArrayList<>();
     private OrderRecyclerAdapter orderRecyclerAdapter;
-
-    TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,11 +66,7 @@ public class FoodListActivity extends AppCompatActivity {
         binding.rvList.setHasFixedSize(true);
         binding.rvList.setLayoutManager(new LinearLayoutManager(this));
 
-        tts = new TextToSpeech(FoodListActivity.this, i -> {
-            if (i != TextToSpeech.ERROR) {
-                tts.setLanguage(Locale.getDefault());
-            }
-        });
+
 
     }
 
@@ -87,12 +77,12 @@ public class FoodListActivity extends AppCompatActivity {
     }
 
 
-    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_speak:
-                tts.speak(getString(R.string.foodListActivityHint), TextToSpeech.QUEUE_FLUSH, null);
+                if( currentUser != null && auth != null){
+                }
                 break;
             case R.id.action_signout:
                 if( currentUser != null && auth != null){
@@ -130,7 +120,7 @@ public class FoodListActivity extends AppCompatActivity {
                         }else {
                             binding.tvListNoEntry.setVisibility(View.VISIBLE);
                         }
-                    }).addOnFailureListener(e -> Toast.makeText(com.example.foodapp.FoodListActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show());
+                    }).addOnFailureListener(e -> Toast.makeText(com.example.foodapp.FoodListActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show());
     }
 
     @Override

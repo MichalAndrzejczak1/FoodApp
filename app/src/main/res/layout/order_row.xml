@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:paddingBottom="10dp"
-                android:text="@string/its_title"
+                android:text="Its title"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -46,7 +46,6 @@
                 android:layout_height="150px"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
-                android:contentDescription="@string/order_image_list"
                 android:cropToPadding="true"
                 android:scaleType="fitXY"
                 android:src="@{url}" />
@@ -58,7 +57,7 @@
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:text="@string/textview" />
+                android:text="TextView" />
 
             <TextView
                 android:id="@+id/tvOrderCount"
@@ -67,7 +66,7 @@
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:text="@string/textview" />
+                android:text="TextView" />
 
             <TextView
                 android:id="@+id/tv_OrderDescription"

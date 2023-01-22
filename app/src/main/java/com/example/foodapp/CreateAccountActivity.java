@@ -1,13 +1,9 @@
 package com.example.foodapp;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -25,7 +21,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class CreateAccountActivity extends AppCompatActivity {
@@ -35,8 +30,6 @@ public class CreateAccountActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     ActivityCreateAccountBinding binding;
     private CollectionReference collectionReference = db.collection("Users");
-
-    TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,19 +73,12 @@ public class CreateAccountActivity extends AppCompatActivity {
          }else {
              Toast.makeText(
                      CreateAccountActivity.this,
-                     getString(R.string.empt_fields_arent_allowed),
+                     "Empty fields aren't allowed",
                      Toast.LENGTH_SHORT)
                      .show();
          }
 
         });
-
-        tts = new TextToSpeech(CreateAccountActivity.this, i -> {
-            if (i != TextToSpeech.ERROR) {
-                tts.setLanguage(Locale.getDefault());
-            }
-        });
-
     }
 
     private void createUserEmailAccount(String email, String password, String username){
@@ -115,29 +101,27 @@ public class CreateAccountActivity extends AppCompatActivity {
                         userObj.put("userId",currentUserId);
                         userObj.put("username",username);
                         userObj.put("password",password);
+                        userObj.put("email",email);
                         userObj.put("money","0");
                         userObj.put("imageURL","0");
 
                         //Save to firestore
                         collectionReference.add(userObj)
-                                .addOnSuccessListener(documentReference -> documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DocumentSnapshot> task1) {
-                                        if( task1.getResult().exists()){
-                                            binding.loginProgress.setVisibility(View.INVISIBLE);
-                                            String name = task1.getResult().getString("username");
+                                .addOnSuccessListener(documentReference -> documentReference.get().addOnCompleteListener(task1 -> {
+                                    if( task1.getResult().exists()){
+                                        binding.loginProgress.setVisibility(View.INVISIBLE);
+                                        String name = task1.getResult().getString("username");
 
-                                            OrderApi orderApi = OrderApi.getInstance();
-                                            orderApi.setUserId(currentUserId);
-                                            orderApi.setUsername(name);
+                                        OrderApi orderApi = OrderApi.getInstance();
+                                        orderApi.setUserId(currentUserId);
+                                        orderApi.setUsername(name);
 
-                                            Intent intent = new Intent(CreateAccountActivity.this, OrderingActivity.class);
-                                            intent.putExtra("username", name);
-                                            intent.putExtra("userId", currentUserId);
-                                            startActivity(intent);
-                                        }else {
+                                        Intent intent = new Intent(CreateAccountActivity.this, OrderingActivity.class);
+                                        intent.putExtra("username", name);
+                                        intent.putExtra("userId", currentUserId);
+                                        startActivity(intent);
+                                    }else {
 
-                                        }
                                     }
                                 })).addOnFailureListener(e -> {
 
@@ -147,26 +131,6 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                     });
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_speak:
-                tts.speak(getString(R.string.createAccountActivityHint), TextToSpeech.QUEUE_FLUSH, null);
-                break;
-            case R.id.action_signout:
-                Toast.makeText(CreateAccountActivity.this, R.string.sign_out_before_account_creation_toast, Toast.LENGTH_SHORT).show();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

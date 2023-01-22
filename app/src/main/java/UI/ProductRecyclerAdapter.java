@@ -54,54 +54,33 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
     public void onBindViewHolder(@NonNull ProductRecyclerAdapter.ViewHolder viewHolder, int position) {
         viewHolder.productName.setText(productList.get(position).getTitle());
         viewHolder.price.setText(productList.get(position).getPrice().toString());
-        switch (position){
+        viewHolder.productPic.setImageResource(context.getResources().getIdentifier(productList.get(position).getPicture(),"drawable",context.getPackageName()));
+
+        switch (position%5){
             case 0: {
-                int drawableId = context.getResources().getIdentifier(productList.get(0).getPicture(), "drawable", context.getPackageName());
-                Picasso.get()
-                        .load(drawableId)
-                        .placeholder(R.drawable.image_three)
-                        .fit()
-                        .into(viewHolder.categoryPic);
                 viewHolder.mainLayout.setBackground(ContextCompat.getDrawable(viewHolder.itemView.getContext(), R.drawable.cat_background1));
                 break;
             }
             case 1: {
-                int drawableId = context.getResources().getIdentifier(productList.get(1).getPicture(), "drawable", context.getPackageName());
-                Picasso.get()
-                        .load(drawableId)
-                        .placeholder(R.drawable.image_three)
-                        .fit()
-                        .into(viewHolder.categoryPic);
+
                 viewHolder.mainLayout.setBackground(ContextCompat.getDrawable(viewHolder.itemView.getContext(), R.drawable.cat_background2));
                 break;
             }
             case 2: {
-                int drawableId = context.getResources().getIdentifier(productList.get(2).getPicture(), "drawable", context.getPackageName());
-                Picasso.get()
-                        .load(drawableId)
-                        .placeholder(R.drawable.image_three)
-                        .fit()
-                        .into(viewHolder.categoryPic);
                 viewHolder.mainLayout.setBackground(ContextCompat.getDrawable(viewHolder.itemView.getContext(), R.drawable.cat_background3));
                 break;
             }
             case 3: {
-                int drawableId = context.getResources().getIdentifier(productList.get(3).getPicture(), "drawable", context.getPackageName());
-                Picasso.get()
-                        .load(drawableId)
-                        .placeholder(R.drawable.image_three)
-                        .fit()
-                        .into(viewHolder.categoryPic);
                 viewHolder.mainLayout.setBackground(ContextCompat.getDrawable(viewHolder.itemView.getContext(), R.drawable.cat_background4));
                 break;
             }
             case 4: {
-                int drawableId = context.getResources().getIdentifier(productList.get(4).getPicture(), "drawable", context.getPackageName());
-                Picasso.get()
-                        .load(drawableId)
-                        .placeholder(R.drawable.image_three)
-                        .fit()
-                        .into(viewHolder.categoryPic);
+//                int drawableId = context.getResources().getIdentifier(productList.get(4).getPicture(), "drawable", context.getPackageName());
+//                Picasso.get()
+//                        .load(drawableId)
+//                        .placeholder(R.drawable.image_three)
+//                        .fit()
+//                        .into(viewHolder.productPic);
                 viewHolder.mainLayout.setBackground(ContextCompat.getDrawable(viewHolder.itemView.getContext(), R.drawable.cat_background5));
                 break;
             }
@@ -123,13 +102,13 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
     public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnLongClickListener,View.OnClickListener {
         TextView productName;
         TextView price;
-        ImageView categoryPic;
+        ImageView productPic;
         ConstraintLayout mainLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             productName = itemView.findViewById(R.id.tvTitleProduct);
-            categoryPic = itemView.findViewById(R.id.ivProduct);
+            productPic = itemView.findViewById(R.id.ivProduct);
             price = itemView.findViewById(R.id.tvPrice);
             mainLayout = itemView.findViewById(R.id.mainLayout);
 
