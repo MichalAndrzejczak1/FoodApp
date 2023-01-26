@@ -39,6 +39,8 @@ public class SettingsActivity extends AppCompatActivity {
     TextToSpeech tts;
     AudioManager audioManager;
 
+    int lastKnownVolume;
+
 
     private CollectionReference collectionReference = db.collection("Users");
 
@@ -65,7 +67,7 @@ public class SettingsActivity extends AppCompatActivity {
         currentUser = auth.getCurrentUser();
         binding = DataBindingUtil.setContentView(this, R.layout.activity_settings);
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-
+        lastKnownVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
 
         //Menu
         binding.ivOrderFood.setOnClickListener(view -> startActivity(new Intent(SettingsActivity.this, OrderingActivity.class)));
@@ -73,7 +75,7 @@ public class SettingsActivity extends AppCompatActivity {
         binding.ivAccount.setOnClickListener(view -> startActivity(new Intent(SettingsActivity.this, AccountActivity.class)));
 //        binding.ivSettings.setOnClickListener(view -> startActivity(new Intent(SettingsActivity.this, SettingsActivity.class)));
         binding.sbSoundLevel.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
-        binding.sbSoundLevel.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
+        binding.sbSoundLevel.setProgress(lastKnownVolume);
 
 
         //Settings
@@ -145,9 +147,14 @@ public class SettingsActivity extends AppCompatActivity {
 
                 editor.remove("silentMode");
                 if (binding.swSilentMode.isChecked()) {
+                    lastKnownVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                    audioManager.setStreamMute(AudioManager.STREAM_MUSIC, true);
+                    binding.sbSoundLevel.setProgress(0);
                     editor.putBoolean("silentMode", true);
                     editor.apply();
                 } else {
+                    audioManager.setStreamMute(AudioManager.STREAM_MUSIC, false);
+                    binding.sbSoundLevel.setProgress(lastKnownVolume);
                     editor.putBoolean("silentMode", false);
                     editor.apply();
                 }
