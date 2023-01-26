@@ -1,9 +1,8 @@
 package com.example.foodapp;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
+import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO;
+import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES;
+import static androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +14,11 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.example.foodapp.databinding.ActivityShowDetailBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -63,9 +67,9 @@ public class ShowDetailActivity extends AppCompatActivity {
         //Setting theme before calling onCreate method.
         boolean value = sharedPreferences.getBoolean("nightTheme", false);
         if (!value) {
-            setTheme(R.style.Theme_Day);
+            setDefaultNightMode(MODE_NIGHT_NO);
         } else {
-            setTheme(R.style.Theme_Night);
+            setDefaultNightMode(MODE_NIGHT_YES);
         }
 
         super.onCreate(savedInstanceState);
@@ -80,15 +84,15 @@ public class ShowDetailActivity extends AppCompatActivity {
                         .getUserId())
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    if(!queryDocumentSnapshots.isEmpty()){
-                        for (QueryDocumentSnapshot users : queryDocumentSnapshots){
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        for (QueryDocumentSnapshot users : queryDocumentSnapshots) {
                             User user = users.toObject(User.class);
                             money = user.getMoney();
                         }
 
-                    }else {
+                    } else {
                     }
-                }).addOnFailureListener(e -> Toast.makeText(ShowDetailActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show());
+                }).addOnFailureListener(e -> Toast.makeText(ShowDetailActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show());
 
 
         Bundle extras = getIntent().getExtras();
@@ -102,8 +106,8 @@ public class ShowDetailActivity extends AppCompatActivity {
         }
         binding.tvTitleShowDetails.setText(title);
         binding.tvDescription.setText(description);
-        binding.tvPriceShowDetails.setText("$"+price);
-        binding.ivProductShowDetail.setImageResource(this.getResources().getIdentifier(picture,"drawable",this.getPackageName()));
+        binding.tvPriceShowDetails.setText("$" + price);
+        binding.ivProductShowDetail.setImageResource(this.getResources().getIdentifier(picture, "drawable", this.getPackageName()));
 //        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.burger1));
 
         NumberFormat formatter = new DecimalFormat("##.00");
@@ -113,28 +117,27 @@ public class ShowDetailActivity extends AppCompatActivity {
             count++;
             binding.tvCount.setText(String.valueOf(count));
 
-            binding.tvPriceShowDetails.setText("$"+formatter.format (price * count));
+            binding.tvPriceShowDetails.setText("$" + formatter.format(price * count));
         });
 
         //On click listener on minus button
         binding.ivMinus.setOnClickListener(view -> {
             int count = Integer.parseInt(binding.tvCount.getText().toString());
-            if(count != 1) {
+            if (count != 1) {
                 count--;
                 binding.tvCount.setText(String.valueOf(count));
             }
-            binding.tvPriceShowDetails.setText(formatter.format (price * count));
+            binding.tvPriceShowDetails.setText(formatter.format(price * count));
         });
 
         //On click listener on make order button
         binding.btnMakeOrder.setOnClickListener(view -> {
             binding.pbShowDetail.setVisibility(View.VISIBLE);
 
-            if(!TextUtils.isEmpty(title) && !TextUtils.isEmpty(description))
-            {
+            if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(description)) {
                 double tPrice = price * Double.parseDouble(binding.tvCount.getText().toString());
                 dMoney = Double.parseDouble(money);
-                if(dMoney >= tPrice) {
+                if (dMoney >= tPrice) {
                     //You have enough money to make an order.
 
                     //Removing specific amount of money from your account
@@ -148,7 +151,7 @@ public class ShowDetailActivity extends AppCompatActivity {
                                     //Uaktualnianie URL użytkownika
                                     db.collection("Users")
                                             .document(document.getId())
-                                            .update("money", String.valueOf(dMoney-tPrice));          //
+                                            .update("money", String.valueOf(dMoney - tPrice));          //
                                 }
                             }
                         }
@@ -161,7 +164,7 @@ public class ShowDetailActivity extends AppCompatActivity {
                     order.setTimeAdded(new Timestamp(new Date()));
                     order.setUserId(currentUser.getUid());
                     order.setPicture(picture);
-                    order.settPrice(Math.round(price * Double.parseDouble(binding.tvCount.getText().toString()))*100.0/100.0);
+                    order.settPrice(Math.round(price * Double.parseDouble(binding.tvCount.getText().toString())) * 100.0 / 100.0);
                     order.setCount(Integer.parseInt(binding.tvCount.getText().toString()));
                     order.setProductNumber(activeProdcutNumber);
                     order.setCategoryNumber(activeCategoryNumber);
@@ -169,23 +172,22 @@ public class ShowDetailActivity extends AppCompatActivity {
                     collectionReference2.add(order).addOnSuccessListener(documentReference -> {
                         binding.pbShowDetail.setVisibility(View.INVISIBLE);
                         startActivity(new Intent(ShowDetailActivity.this, FoodListActivity.class));
-                        Toast.makeText(ShowDetailActivity.this, "Making order done!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShowDetailActivity.this, getString(R.string.making_order_done), Toast.LENGTH_SHORT).show();
                         finish();
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             binding.pbShowDetail.setVisibility(View.INVISIBLE);
-                            Log.d("ShowDetailActivity", "onFailure: + adding order + "+ e.getMessage());
+                            Log.d("ShowDetailActivity", "onFailure: + adding order + " + e.getMessage());
                         }
                     });
 
-                }
-                else {
-                    Toast.makeText(ShowDetailActivity.this, "Not enough money to make an order!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ShowDetailActivity.this, getString(R.string.not_enough_money_to_order), Toast.LENGTH_SHORT).show();
                 }
 
 
-                }
+            }
             binding.pbShowDetail.setVisibility(View.INVISIBLE);
 
         });

@@ -1,8 +1,14 @@
 package com.example.foodapp;
 
+import static android.speech.tts.TextToSpeech.Engine.KEY_PARAM_VOLUME;
+import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO;
+import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES;
+import static androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +28,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import Model.Order;
 import UI.OrderRecyclerAdapter;
@@ -38,6 +45,8 @@ public class FoodListActivity extends AppCompatActivity {
     private List<Order> orderList = new ArrayList<>();
     private OrderRecyclerAdapter orderRecyclerAdapter;
 
+    TextToSpeech tts;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Shared preferences
@@ -46,9 +55,9 @@ public class FoodListActivity extends AppCompatActivity {
         //Setting theme before calling onCreate method.
         boolean value = sharedPreferences.getBoolean("nightTheme", false);
         if (!value) {
-            setTheme(R.style.Theme_Day);
+            setDefaultNightMode(MODE_NIGHT_NO);
         } else {
-            setTheme(R.style.Theme_Night);
+            setDefaultNightMode(MODE_NIGHT_YES);
         }
 
         super.onCreate(savedInstanceState);
@@ -59,15 +68,21 @@ public class FoodListActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_food_list);
 
         binding.ivOrderFood.setOnClickListener(view -> startActivity(new Intent(FoodListActivity.this, OrderingActivity.class)));
-        binding.ivListOfOrders.setOnClickListener(view -> startActivity(new Intent(FoodListActivity.this, FoodListActivity.class)));
+//        binding.ivListOfOrders.setOnClickListener(view -> startActivity(new Intent(FoodListActivity.this, FoodListActivity.class)));
         binding.ivAccount.setOnClickListener(view -> startActivity(new Intent(FoodListActivity.this, AccountActivity.class)));
         binding.ivSettings.setOnClickListener(view -> startActivity(new Intent(FoodListActivity.this, SettingsActivity.class)));
 
         binding.rvList.setHasFixedSize(true);
         binding.rvList.setLayoutManager(new LinearLayoutManager(this));
 
-
-
+        // ----------------------- TTS CONFIG -----------------------
+        tts = new TextToSpeech(FoodListActivity.this, i -> {
+            if (i != TextToSpeech.ERROR) {
+                tts.setLanguage(Locale.getDefault());
+            }
+        });
+        tts.setSpeechRate(2.5f);
+        // ----------------------------------------------------------
     }
 
     @Override
@@ -79,13 +94,16 @@ public class FoodListActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        Bundle params = new Bundle();
+        params.putFloat(KEY_PARAM_VOLUME, 0.5f);
+        switch (item.getItemId()) {
             case R.id.action_speak:
-                if( currentUser != null && auth != null){
+                if (currentUser != null && auth != null) {
+                    tts.speak(getString(R.string.foodListActivityHint), TextToSpeech.QUEUE_FLUSH, params, null);
                 }
                 break;
             case R.id.action_signout:
-                if( currentUser != null && auth != null){
+                if (currentUser != null && auth != null) {
                     auth.signOut();
                 }
                 startActivity(new Intent(com.example.foodapp.FoodListActivity.this, MainActivity.class));
@@ -101,26 +119,26 @@ public class FoodListActivity extends AppCompatActivity {
 
 
         collectionReference.whereEqualTo("userId", OrderApi.getInstance()
-                    .getUserId())
-                    .get()
-                    .addOnSuccessListener(queryDocumentSnapshots -> {
-                        orderList.clear();
-                        if(!queryDocumentSnapshots.isEmpty()){
-                            for (QueryDocumentSnapshot orderS : queryDocumentSnapshots){
-                                Order order = orderS.toObject(Order.class);
-                                orderList.add(order);
-                            }
-
-                            OrderRecyclerAdapter myRecyclerViewAdapter = new OrderRecyclerAdapter(FoodListActivity.this, orderList);
-                            binding.setMyAdapter(myRecyclerViewAdapter);
-                            orderRecyclerAdapter = new OrderRecyclerAdapter(FoodListActivity.this, orderList);
-                            binding.rvList.setAdapter(orderRecyclerAdapter);
-                            orderRecyclerAdapter.notifyDataSetChanged();
-
-                        }else {
-                            binding.tvListNoEntry.setVisibility(View.VISIBLE);
+                        .getUserId())
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    orderList.clear();
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        for (QueryDocumentSnapshot orderS : queryDocumentSnapshots) {
+                            Order order = orderS.toObject(Order.class);
+                            orderList.add(order);
                         }
-                    }).addOnFailureListener(e -> Toast.makeText(com.example.foodapp.FoodListActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show());
+
+                        OrderRecyclerAdapter myRecyclerViewAdapter = new OrderRecyclerAdapter(FoodListActivity.this, orderList);
+                        binding.setMyAdapter(myRecyclerViewAdapter);
+                        orderRecyclerAdapter = new OrderRecyclerAdapter(FoodListActivity.this, orderList);
+                        binding.rvList.setAdapter(orderRecyclerAdapter);
+                        orderRecyclerAdapter.notifyDataSetChanged();
+
+                    } else {
+                        binding.tvListNoEntry.setVisibility(View.VISIBLE);
+                    }
+                }).addOnFailureListener(e -> Toast.makeText(com.example.foodapp.FoodListActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show());
     }
 
     @Override
@@ -128,7 +146,7 @@ public class FoodListActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
         boolean value = sharedPreferences.getBoolean("logout", false);
-        if( value){
+        if (value) {
             auth.signOut();
         }
         super.onStop();

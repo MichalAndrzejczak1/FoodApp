@@ -25,40 +25,55 @@
 
         <EditText
             android:id="@+id/et_Username"
-            android:hint="Username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="1"
+            android:autofillHints=""
+            android:hint="@string/username"
             android:inputType="textPersonName"
+            android:maxLines="1"
             android:paddingBottom="16dp"
-            />
+            android:textColor="@color/ibm_orange"
+            android:textColorHint="@color/ibm_orange"
+            android:textSize="34sp"
+            android:textStyle="bold" />
+
         <AutoCompleteTextView
             android:id="@+id/email"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
             android:maxLines="1"
-            android:layout_height="wrap_content" />
+            android:minHeight="48dp"
+            android:textColor="@color/ibm_orange"
+            android:textColorHint="@color/ibm_orange"
+            android:textSize="34sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/et_Password"
-            android:hint="Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:inputType="textPassword"
             android:layout_marginTop="16dp"
-            />
+            android:autofillHints=""
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            android:textColor="@color/ibm_orange"
+            android:textColorHint="@color/ibm_orange"
+            android:textSize="34sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btn_Login"
-            android:text="Create Account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/teal_200"
-            android:background="@color/transparent"
             android:layout_marginTop="16dp"
-            android:textStyle="bold"/>
+            android:background="@color/ibm_purple"
+            android:text="@string/create_account"
+            android:textSize="34sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </layout>

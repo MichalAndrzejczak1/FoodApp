@@ -1,7 +1,8 @@
 package com.example.foodapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
+import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO;
+import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES;
+import static androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +10,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.example.foodapp.databinding.ActivityLoginBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,9 +35,9 @@ public class LoginActivity extends AppCompatActivity {
         //Setting theme before calling onCreate method.
         boolean value = sharedPreferences.getBoolean("nightTheme", false);
         if (!value) {
-            setTheme(R.style.Theme_Day);
+            setDefaultNightMode(MODE_NIGHT_NO);
         } else {
-            setTheme(R.style.Theme_Night);
+            setDefaultNightMode(MODE_NIGHT_YES);
         }
 
         super.onCreate(savedInstanceState);
@@ -53,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginEmailPasswordUser(String email, String password) {
         binding.loginProgress.setVisibility(View.VISIBLE);
-        if (!TextUtils.isEmpty(password) && !TextUtils.isEmpty(email)){
+        if (!TextUtils.isEmpty(password) && !TextUtils.isEmpty(email)) {
             auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
                 FirebaseUser user = auth.getCurrentUser();
                 String currentUserId = user.getUid();
@@ -62,8 +66,8 @@ public class LoginActivity extends AppCompatActivity {
                         .addSnapshotListener((value, error) -> {
 
                             assert value != null;
-                            if(!value.isEmpty()){
-                                for (QueryDocumentSnapshot snapshot : value){
+                            if (!value.isEmpty()) {
+                                for (QueryDocumentSnapshot snapshot : value) {
                                     OrderApi orderApi = OrderApi.getInstance();
                                     orderApi.setUsername(snapshot.getString("username"));
                                     orderApi.setUserId(snapshot.getString("userId"));
@@ -80,18 +84,18 @@ public class LoginActivity extends AppCompatActivity {
 
             });
 
-        }
-        else {
+        } else {
             binding.loginProgress.setVisibility(View.GONE);
             Toast.makeText(LoginActivity.this, "Please enter email and password", Toast.LENGTH_SHORT).show();
         }
     }
+
     @Override
     protected void onStop() {
 
         SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
         boolean value = sharedPreferences.getBoolean("logout", false);
-        if( value){
+        if (value) {
             auth.signOut();
         }
         super.onStop();

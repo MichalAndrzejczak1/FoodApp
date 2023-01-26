@@ -1,20 +1,26 @@
 package com.example.foodapp;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
+import static android.speech.tts.TextToSpeech.Engine.KEY_PARAM_VOLUME;
+import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO;
+import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES;
+import static androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioAttributes;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.example.foodapp.databinding.ActivityAccountBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,8 +37,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 import Model.User;
 //import UI.OrderRecyclerAdapter;
@@ -47,6 +54,8 @@ public class AccountActivity extends AppCompatActivity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
     ActivityResultLauncher<String> takePhoto;
+
+    TextToSpeech tts;
 
 
     private StorageReference storageReference;
@@ -63,9 +72,9 @@ public class AccountActivity extends AppCompatActivity {
         //Setting theme before calling onCreate method.
         boolean value = sharedPreferences.getBoolean("nightTheme", false);
         if (!value) {
-            setTheme(R.style.Theme_Day);
+            setDefaultNightMode(MODE_NIGHT_NO);
         } else {
-            setTheme(R.style.Theme_Night);
+            setDefaultNightMode(MODE_NIGHT_YES);
         }
 
         super.onCreate(savedInstanceState);
@@ -87,8 +96,8 @@ public class AccountActivity extends AppCompatActivity {
                         .getUserId())
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    if(!queryDocumentSnapshots.isEmpty()){
-                        for (QueryDocumentSnapshot users : queryDocumentSnapshots){
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        for (QueryDocumentSnapshot users : queryDocumentSnapshots) {
                             User user = users.toObject(User.class);
                             binding.tvEmailKontaText.setText(user.getEmail());
                             binding.tvNazwaKontaText.setText(user.getUsername());
@@ -106,7 +115,7 @@ public class AccountActivity extends AppCompatActivity {
 
         binding.ivOrderFood.setOnClickListener(view -> startActivity(new Intent(AccountActivity.this, OrderingActivity.class)));
         binding.ivListOfOrders.setOnClickListener(view -> startActivity(new Intent(AccountActivity.this, FoodListActivity.class)));
-        binding.ivAccount.setOnClickListener(view -> startActivity(new Intent(AccountActivity.this, AccountActivity.class)));
+//        binding.ivAccount.setOnClickListener(view -> startActivity(new Intent(AccountActivity.this, AccountActivity.class)));
         binding.ivSettings.setOnClickListener(view -> startActivity(new Intent(AccountActivity.this, SettingsActivity.class)));
         binding.ivAccountImageAccountActivity.setOnClickListener(view -> {
             takePhoto.launch("image/*");
@@ -116,7 +125,7 @@ public class AccountActivity extends AppCompatActivity {
         binding.btnDoladuj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AccountActivity.this,"It may take some time...",Toast.LENGTH_SHORT).show();
+                Toast.makeText(AccountActivity.this, "It may take some time...", Toast.LENGTH_SHORT).show();
                 binding.pbAccount.setVisibility(View.VISIBLE);
 
                 //// Wyłuskiwanie dokumentu korzystając z query
@@ -130,7 +139,7 @@ public class AccountActivity extends AppCompatActivity {
                                 db.collection("Users")
                                         .document(document.getId())
                                         .update("money", "500");
-                                Toast.makeText(AccountActivity.this,"Recharging completed",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AccountActivity.this, "Recharging completed", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -139,12 +148,20 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
+        // ----------------------- TTS CONFIG -----------------------
+        tts = new TextToSpeech(AccountActivity.this, i -> {
+            if (i != TextToSpeech.ERROR) {
+                tts.setLanguage(Locale.getDefault());
+            }
+        });
+        tts.setSpeechRate(2.5f);
+        // ----------------------------------------------------------
+
     }
 
-    private void saveIMG(){
+    private void saveIMG() {
         binding.pbAccount.setVisibility(View.VISIBLE);
-        if(imageUri != null)
-        {
+        if (imageUri != null) {
             //Ścieżka gdzie ma być w Cloud Storage zapisywany obrazek
             StorageReference filepath = storageReference.child("foodapp_images")
                     .child("myImage" + Timestamp.now().getSeconds());
@@ -165,18 +182,17 @@ public class AccountActivity extends AppCompatActivity {
                                         db.collection("Users")
                                                 .document(document.getId())
                                                 .update("imageURL", imageURl);
-                                        Toast.makeText(AccountActivity.this,"Loading image into database done",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(AccountActivity.this, "Loading image into database done", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
                         });
 
 
-                    }).addOnFailureListener(e -> Toast.makeText(AccountActivity.this,"Loading image into database went wrong",Toast.LENGTH_SHORT).show())).addOnFailureListener(e -> Toast.makeText(AccountActivity.this,"Uri is empty",Toast.LENGTH_SHORT).show());
+                    }).addOnFailureListener(e -> Toast.makeText(AccountActivity.this, "Loading image into database went wrong", Toast.LENGTH_SHORT).show())).addOnFailureListener(e -> Toast.makeText(AccountActivity.this, "Uri is empty", Toast.LENGTH_SHORT).show());
         }
         binding.pbAccount.setVisibility(View.INVISIBLE);
     }
-
 
 
     @Override
@@ -187,14 +203,16 @@ public class AccountActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        Bundle params = new Bundle();
+        params.putFloat(KEY_PARAM_VOLUME, 0.5f);
+        switch (item.getItemId()) {
             case R.id.action_speak:
-                if( currentUser != null && auth != null){
-//                    startActivity(new Intent(com.example.foodapp.FoodListActivity.this, Ac.class));
+                if (currentUser != null && auth != null) {
+                    tts.speak(getString(R.string.accountActivityHint), TextToSpeech.QUEUE_FLUSH, params, null);
                 }
                 break;
             case R.id.action_signout:
-                if( currentUser != null && auth != null){
+                if (currentUser != null && auth != null) {
                     auth.signOut();
                 }
                 startActivity(new Intent(this, MainActivity.class));
@@ -209,7 +227,7 @@ public class AccountActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
         boolean value = sharedPreferences.getBoolean("logout", false);
-        if( value){
+        if (value) {
             auth.signOut();
         }
         super.onStop();

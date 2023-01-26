@@ -1,35 +1,37 @@
 package com.example.foodapp;
 
+import static android.speech.tts.TextToSpeech.Engine.KEY_PARAM_VOLUME;
+import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO;
+import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES;
+import static androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
+import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-
 import com.example.foodapp.databinding.ActivityOrderingBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import Model.Category;
 import Model.Order;
@@ -65,6 +67,7 @@ public class OrderingActivity extends AppCompatActivity {
     private int activeCategoryNumber;
     private int activeProductNumber;
 
+    TextToSpeech tts;
 
 
     @Override
@@ -75,9 +78,9 @@ public class OrderingActivity extends AppCompatActivity {
         //Setting theme before calling onCreate method.
         boolean value = sharedPreferences.getBoolean("nightTheme", false);
         if (!value) {
-            setTheme(R.style.Theme_Day);
+            setDefaultNightMode(MODE_NIGHT_NO);
         } else {
-            setTheme(R.style.Theme_Night);
+            setDefaultNightMode(MODE_NIGHT_YES);
         }
 
         super.onCreate(savedInstanceState);
@@ -89,7 +92,7 @@ public class OrderingActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_ordering);
 
         //Dolne menu
-        binding.ivOrderFood.setOnClickListener(view -> startActivity(new Intent(OrderingActivity.this, OrderingActivity.class)));
+//        binding.ivOrderFood.setOnClickListener(view -> startActivity(new Intent(OrderingActivity.this, OrderingActivity.class)));
         binding.ivListOfOrders.setOnClickListener(view -> startActivity(new Intent(OrderingActivity.this, FoodListActivity.class)));
         binding.ivAccount.setOnClickListener(view -> startActivity(new Intent(OrderingActivity.this, AccountActivity.class)));
         binding.ivSettings.setOnClickListener(view -> startActivity(new Intent(OrderingActivity.this, SettingsActivity.class)));
@@ -128,6 +131,15 @@ public class OrderingActivity extends AppCompatActivity {
 
                 }).addOnFailureListener(e -> Toast.makeText(OrderingActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show());
 //            Klasa odpowiadająca za 2 recyclerViewy
+
+        // ----------------------- TTS CONFIG -----------------------
+        tts = new TextToSpeech(OrderingActivity.this, i -> {
+            if (i != TextToSpeech.ERROR) {
+                tts.setLanguage(Locale.getDefault());
+            }
+        });
+        tts.setSpeechRate(2.5f);
+        // ----------------------------------------------------------
 
     }
 
@@ -217,10 +229,12 @@ public class OrderingActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Bundle params = new Bundle();
+        params.putFloat(KEY_PARAM_VOLUME, 0.5f);
         switch (item.getItemId()){
             case R.id.action_speak: {
                 if (currentUser != null && auth != null) {
-//                    startActivity(new Intent(com.example.foodapp.FoodListActivity.this, PostJournalActivity.class));
+                    tts.speak(getString(R.string.orderingActivityHint), TextToSpeech.QUEUE_FLUSH, params, null);
                 }
             }
             break;

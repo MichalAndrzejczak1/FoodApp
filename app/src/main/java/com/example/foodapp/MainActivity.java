@@ -1,5 +1,9 @@
 package com.example.foodapp;
 
+import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO;
+import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES;
+import static androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser currentUser;
 
-    private FirebaseFirestore db =  FirebaseFirestore.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collectionReference = db.collection("Users");
 
 
@@ -36,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
         //Setting theme before calling onCreate method.
         boolean var = sharedPreferences.getBoolean("nightTheme", false);
         if (!var) {
-            setTheme(R.style.Theme_Day);
+            setDefaultNightMode(MODE_NIGHT_NO);
         } else {
-            setTheme(R.style.Theme_Night);
+            setDefaultNightMode(MODE_NIGHT_YES);
         }
 
         super.onCreate(savedInstanceState);
@@ -49,19 +53,19 @@ public class MainActivity extends AppCompatActivity {
 
         authStateListener = firebaseAuth -> {
             currentUser = firebaseAuth.getCurrentUser();
-            if(currentUser != null){
+            if (currentUser != null) {
                 currentUser = firebaseAuth.getCurrentUser();
                 final String currentUserId = currentUser.getUid();
 
-                collectionReference.whereEqualTo("userId",currentUserId)
+                collectionReference.whereEqualTo("userId", currentUserId)
                         .addSnapshotListener((value, error) -> {
-                            if(error != null){
+                            if (error != null) {
                                 return;
                             }
                             String name;
 
-                            if(!value.isEmpty()){
-                                for (QueryDocumentSnapshot snapshot : value){
+                            if (!value.isEmpty()) {
+                                for (QueryDocumentSnapshot snapshot : value) {
                                     OrderApi orderApi = OrderApi.getInstance();
                                     orderApi.setUserId(snapshot.getString("userId"));
                                     orderApi.setUsername(snapshot.getString("username"));
@@ -75,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         };
-
 
 
         //Get started button

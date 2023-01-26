@@ -25,49 +25,61 @@
 
         <AutoCompleteTextView
             android:id="@+id/et_Email"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
             android:maxLines="1"
-            android:layout_height="wrap_content" />
+            android:minHeight="48dp"
+            android:textColor="@color/ibm_orange"
+            android:textColorHint="@color/ibm_orange"
+            android:textSize="34sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/et_password"
-            android:hint="Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:inputType="textPassword"
             android:layout_marginTop="16dp"
-            />
-        
+            android:autofillHints=""
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:minHeight="48dp"
+            android:textColor="@color/ibm_orange"
+            android:textColorHint="@color/ibm_orange"
+            android:textSize="34sp"
+            android:textStyle="bold" />
+
         <Button
             android:id="@+id/btn_Login"
-            android:text="Login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/teal_200"
-            android:background="@color/transparent"
             android:layout_marginTop="16dp"
-            android:textStyle="bold"/>
+            android:background="@color/ibm_purple"
+            android:text="@string/login"
+            android:textSize="34sp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/tv_Or"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="18sp"
             android:gravity="center_horizontal"
-            android:text="OR" />
+            android:text="@string/or"
+            android:textColor="@color/ibm_orange"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btn_CreateAccount"
-            android:text="Create Account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/teal_200"
-            android:background="@color/transparent"
             android:layout_marginTop="16dp"
-            android:textStyle="bold"/>
+            android:background="@color/ibm_purple"
+            android:text="@string/create_account"
+            android:textSize="34sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </layout>

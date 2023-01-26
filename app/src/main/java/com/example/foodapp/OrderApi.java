@@ -24,12 +24,15 @@ public class OrderApi extends Application {
     }
 
 
-    public OrderApi(){}
+    public OrderApi() {
+    }
 
-    public static OrderApi getInstance(){
-        if(instance == null)
+    public static OrderApi getInstance() {
+        if (instance == null)
             instance = new OrderApi();
 
         return instance;
-    };
+    }
+
+    ;
 }

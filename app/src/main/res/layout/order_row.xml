@@ -34,10 +34,12 @@
                 android:id="@+id/tv_OrderTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:padding="10dp"
                 android:paddingBottom="10dp"
-                android:text="Its title"
-                android:textSize="18sp"
+                android:text="@string/its_title"
+                android:textColor="@color/ibm_black"
+                android:textSize="48sp"
                 android:textStyle="bold" />
 
             <ImageView
@@ -46,6 +48,7 @@
                 android:layout_height="150px"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:contentDescription="@string/order_image_list"
                 android:cropToPadding="true"
                 android:scaleType="fitXY"
                 android:src="@{url}" />
@@ -54,39 +57,52 @@
                 android:id="@+id/tvOrderTotalPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:text="TextView" />
+                android:text="@string/textview"
+                android:textColor="@color/ibm_black"
+                android:textSize="34sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvOrderCount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:text="TextView" />
+                android:text="@string/textview"
+                android:textColor="@color/ibm_black"
+                android:textSize="34sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_OrderDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:padding="10dp"
                 android:paddingStart="10dp"
                 android:paddingTop="15dp"
                 android:paddingEnd="15dp"
                 android:paddingBottom="10dp"
                 android:text=""
-                android:textSize="14sp"
+                android:textColor="@color/ibm_black"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_OrderTimestamp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:padding="5dp"
                 android:text="@{timestamp}"
+                android:textColor="@color/ibm_black"
+                android:textSize="24sp"
                 android:textStyle="italic" />
         </LinearLayout>
 
