@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
         //Setting theme before calling onCreate method.
         boolean var = sharedPreferences.getBoolean("nightTheme", false);
         if (!var) {
-            setDefaultNightMode(MODE_NIGHT_NO);
+            setTheme(R.style.Theme_Day);
         } else {
-            setDefaultNightMode(MODE_NIGHT_YES);
+            setTheme(R.style.Theme_Night);
         }
 
         super.onCreate(savedInstanceState);

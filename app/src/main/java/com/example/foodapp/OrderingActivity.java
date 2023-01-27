@@ -78,9 +78,9 @@ public class OrderingActivity extends AppCompatActivity {
         //Setting theme before calling onCreate method.
         boolean value = sharedPreferences.getBoolean("nightTheme", false);
         if (!value) {
-            setDefaultNightMode(MODE_NIGHT_NO);
+            setTheme(R.style.Theme_Day);
         } else {
-            setDefaultNightMode(MODE_NIGHT_YES);
+            setTheme(R.style.Theme_Night);
         }
 
         super.onCreate(savedInstanceState);
