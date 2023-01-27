@@ -203,8 +203,9 @@ public class AccountActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
         Bundle params = new Bundle();
-        params.putFloat(KEY_PARAM_VOLUME, 0.5f);
+        params.putFloat(KEY_PARAM_VOLUME, sharedPreferences.getFloat("volume", 0.5f));
         switch (item.getItemId()) {
             case R.id.action_speak:
                 if (currentUser != null && auth != null) {

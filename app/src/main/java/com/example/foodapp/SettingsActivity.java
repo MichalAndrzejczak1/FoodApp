@@ -98,6 +98,8 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, i, 0);
+                editor.putFloat("volume", i);
+                editor.apply();
             }
 
             @Override
@@ -152,12 +154,14 @@ public class SettingsActivity extends AppCompatActivity {
                     binding.sbSoundLevel.setProgress(0);
                     binding.sbSoundLevel.setEnabled(false);
                     editor.putBoolean("silentMode", true);
+                    editor.putFloat("volume", 0);
                     editor.apply();
                 } else {
                     audioManager.setStreamMute(AudioManager.STREAM_MUSIC, false);
                     binding.sbSoundLevel.setProgress(lastKnownVolume);
                     binding.sbSoundLevel.setEnabled(true);
                     editor.putBoolean("silentMode", false);
+                    editor.putFloat("volume", lastKnownVolume);
                     editor.apply();
                 }
             }
@@ -181,8 +185,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
         Bundle params = new Bundle();
-        params.putFloat(KEY_PARAM_VOLUME, 0.5f);
+        params.putFloat(KEY_PARAM_VOLUME, sharedPreferences.getFloat("volume", 0.5f));
         switch (item.getItemId()) {
             case R.id.action_speak:
                 if (currentUser != null && auth != null) {
