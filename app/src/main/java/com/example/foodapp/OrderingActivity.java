@@ -138,7 +138,7 @@ public class OrderingActivity extends AppCompatActivity {
                 tts.setLanguage(Locale.getDefault());
             }
         });
-        tts.setSpeechRate(2.5f);
+        tts.setSpeechRate(1.5f);
         // ----------------------------------------------------------
 
     }
