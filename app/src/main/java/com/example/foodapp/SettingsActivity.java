@@ -53,9 +53,9 @@ public class SettingsActivity extends AppCompatActivity {
         //Setting theme before calling onCreate method.
         boolean value = sharedPreferences.getBoolean("nightTheme", false);
         if (!value) {
-            setDefaultNightMode(MODE_NIGHT_NO);
+            setTheme(R.style.Theme_Day);
         } else {
-            setDefaultNightMode(MODE_NIGHT_YES);
+            setTheme(R.style.Theme_Night);
         }
 
         super.onCreate(savedInstanceState);
@@ -150,11 +150,13 @@ public class SettingsActivity extends AppCompatActivity {
                     lastKnownVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
                     audioManager.setStreamMute(AudioManager.STREAM_MUSIC, true);
                     binding.sbSoundLevel.setProgress(0);
+                    binding.sbSoundLevel.setEnabled(false);
                     editor.putBoolean("silentMode", true);
                     editor.apply();
                 } else {
                     audioManager.setStreamMute(AudioManager.STREAM_MUSIC, false);
                     binding.sbSoundLevel.setProgress(lastKnownVolume);
+                    binding.sbSoundLevel.setEnabled(true);
                     editor.putBoolean("silentMode", false);
                     editor.apply();
                 }
