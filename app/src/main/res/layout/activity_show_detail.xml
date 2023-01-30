@@ -174,8 +174,8 @@
                     android:padding="4px"
                     android:text="@string/title"
                     android:textAlignment="center"
-                    android:textColor="#373b54"
-                    android:textSize="24sp"
+                    android:textColor="@color/ibm_orange"
+                    android:textSize="48sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -183,16 +183,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="2px"
-                    android:text="@string/dollar"
+                    android:text="$"
                     android:textAlignment="center"
-                    android:textColor="#ff5e00"
-                    android:textSize="24sp" />
+                    android:textColor="@color/ibm_orange"
+                    android:textSize="48sp" />
 
                 <ImageView
                     android:id="@+id/ivProductShowDetail"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/food_icon"
+                    android:layout_height="152dp"
+                    android:contentDescription="@string/product_image"
                     android:padding="2px"
                     app:srcCompat="@drawable/burger4" />
 
@@ -211,31 +211,29 @@
 
                         <ImageView
                             android:id="@+id/ivMinus"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_weight="1"
-                            android:contentDescription="@string/minus_icon"
                             app:srcCompat="@drawable/minus" />
 
                         <TextView
                             android:id="@+id/tvCount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="16dp"
                             android:layout_weight="1"
-                            android:text="@string/one"
+                            android:text="1"
                             android:textAlignment="center"
-                            android:textColor="#0B0101"
-                            android:textSize="18sp"
+                            android:textColor="@color/ibm_orange"
+                            android:textSize="48sp"
                             android:textStyle="bold" />
 
                         <ImageView
                             android:id="@+id/ivPlus"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
                             android:layout_weight="1"
-                            android:contentDescription="@string/plus_icon"
                             app:srcCompat="@drawable/plus" />
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -246,14 +244,18 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/description"
-                    android:textColor="#0C0000"
+                    android:textColor="@color/ibm_orange"
+                    android:textSize="34sp"
                     android:textStyle="bold|italic" />
 
                 <TextView
                     android:id="@+id/tvDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp" />
+                    android:gravity="center_horizontal|center_vertical"
+                    android:padding="10dp"
+                    android:textColor="@android:color/holo_orange_light"
+                    android:textSize="24sp" />
 
                 <Button
                     android:id="@+id/btnMakeOrder"
@@ -261,9 +263,11 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
+                    android:background="@color/ibm_purple"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="@string/make_order"
+                    android:textSize="34sp"
                     app:cornerRadius="40dp" />
 
                 <ProgressBar

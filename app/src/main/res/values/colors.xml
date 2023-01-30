@@ -16,5 +16,14 @@
     <color name="blue">#0288D1</color>
     <color name="blue_dark">#005B9F</color>
     <color name="blue_light">#81D4FA</color>
+    
+    <!-- IBM BLIND SAFE COLORS -->
+    <color name="ibm_blue">#648fff</color>
+    <color name="ibm_purple">#785ef0</color>
+    <color name="ibm_pink">#dc267f</color>
+    <color name="ibm_orange">#fe6100</color>
+    <color name="ibm_yellow">#ffb000</color>
+    <color name="ibm_black">#000000</color>
+    <color name="ibm_white">#ffffff</color>
 
 </resources>

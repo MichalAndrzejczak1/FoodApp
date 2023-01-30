@@ -14,178 +14,76 @@
 
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/tvEmailKonta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="@string/email"
-                    android:textSize="14sp"
-                    android:textStyle="bold|italic"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/ivEmailKontaObrazek"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.528" />
-
-                <ImageView
-                    android:id="@+id/ivNazwaKontaObrazek"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/account_icon"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.022"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.469"
-                    app:srcCompat="@drawable/ic_account" />
-
-                <TextView
-                    android:id="@+id/tvNazwaKontaText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tu_emailkonta"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.18"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.476" />
-
-                <ImageView
-                    android:id="@+id/ivEmailKontaObrazek"
-                    android:layout_width="48dp"
-                    android:layout_height="50dp"
-                    android:contentDescription="@string/email_logo"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.022"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.552"
-                    app:srcCompat="@drawable/ic_email" />
-
-                <TextView
-                    android:id="@+id/tvNazwaKonta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:layout_marginEnd="264dp"
-                    android:text="@string/name"
-                    android:textSize="14sp"
-                    android:textStyle="bold|italic"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.018"
-                    app:layout_constraintStart_toEndOf="@+id/ivNazwaKontaObrazek"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.449" />
-
-                <TextView
-                    android:id="@+id/tvEmailKontaText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tu_emailkonta"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/ivEmailKontaObrazek"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.56" />
-
-                <TextView
-                    android:id="@+id/tvHasloKontaText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tu_haslokonta"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/ivHasloKontaObrazek"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.64" />
-
-                <ImageView
-                    android:id="@+id/ivHasloKontaObrazek"
-                    android:layout_width="48dp"
-                    android:layout_height="50dp"
-                    android:contentDescription="@string/password"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.022"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.634"
-                    app:srcCompat="@drawable/ic_haslo" />
-
-                <TextView
-                    android:id="@+id/tvHasloKonta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/password"
-                    android:textSize="14sp"
-                    android:textStyle="bold|italic"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.028"
-                    app:layout_constraintStart_toEndOf="@+id/ivHasloKontaObrazek"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.606" />
-
-                <ImageView
-                    android:id="@+id/ivSrodkiKontaObrazek"
-                    android:layout_width="48dp"
-                    android:layout_height="50dp"
-                    android:contentDescription="@string/money"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.022"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.72"
-                    app:srcCompat="@drawable/ic_money" />
-
-                <TextView
-                    android:id="@+id/tvSrodkiKontaText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tu_srodkikonta"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/ivSrodkiKontaObrazek"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.72" />
-
-                <TextView
-                    android:id="@+id/tvSrodkiKonta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/money"
-                    android:textSize="14sp"
-                    android:textStyle="bold|italic"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.028"
-                    app:layout_constraintStart_toEndOf="@+id/ivSrodkiKontaObrazek"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.689" />
-
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_editor_absoluteX="3dp">
+                    android:id="@+id/constraintLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tvYourAccount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:gravity="center_horizontal"
+                        android:text="@string/your_account"
+                        android:textColor="@color/ibm_orange"
+                        android:textSize="34sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/ivAccountImageAccountActivity"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="8dp"
+                        android:contentDescription="@string/user_profile_picture"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvYourAccount"
+                        app:srcCompat="@drawable/ic_accountimage" />
+
+                    <ImageView
+                        android:id="@+id/ivSrodkiKontaObrazek"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:contentDescription="@string/money"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ivHasloKontaObrazek"
+                        app:srcCompat="@drawable/ic_money" />
+
+                    <TextView
+                        android:id="@+id/tvSrodkiKontaText"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/tu_srodkikonta"
+                        android:textColor="@color/ibm_purple"
+                        android:textSize="24sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvSrodkiKonta"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvSrodkiKonta"
+                        app:layout_constraintTop_toTopOf="@+id/tvSrodkiKonta" />
 
                     <ProgressBar
                         android:id="@+id/pbAccount"
@@ -199,77 +97,177 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.38" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerView2"
-                        android:layout_width="0dp"
-                        android:layout_height="249dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        tools:ignore="MissingConstraints"
-                        tools:layout_editor_absoluteY="347dp" />
-
                     <Button
                         android:id="@+id/btnDoladuj"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="#13DCA3"
-                        android:padding="10px"
+                        android:background="@color/ibm_purple"
+                        android:padding="3dp"
                         android:text="@string/recharge_money"
-                        android:textColor="#5E35B1"
+                        android:textSize="24sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.501"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/recyclerView2" />
+                        app:layout_constraintTop_toBottomOf="@+id/ivSrodkiKontaObrazek" />
+
+                    <ImageView
+                        android:id="@+id/ivNazwaKontaObrazek"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="250dp"
+                        android:contentDescription="@string/account_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_account" />
+
+                    <TextView
+                        android:id="@+id/tvNazwaKonta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/name"
+                        android:textColor="#fe6100"
+                        android:textSize="24sp"
+                        android:textStyle="bold|italic"
+                        app:layout_constraintBottom_toBottomOf="@+id/ivNazwaKontaObrazek"
+                        app:layout_constraintStart_toEndOf="@+id/ivNazwaKontaObrazek"
+                        app:layout_constraintTop_toTopOf="@+id/ivNazwaKontaObrazek" />
+
+                    <TextView
+                        android:id="@+id/tvNazwaKontaText"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/tu_emailkonta"
+                        android:textColor="@color/ibm_purple"
+                        android:textSize="24sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvNazwaKonta"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvNazwaKonta"
+                        app:layout_constraintTop_toTopOf="@+id/tvNazwaKonta" />
+
+                    <ImageView
+                        android:id="@+id/ivEmailKontaObrazek"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:contentDescription="@string/email_logo"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ivNazwaKontaObrazek"
+                        app:srcCompat="@drawable/ic_email" />
+
+                    <TextView
+                        android:id="@+id/tvEmailKonta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/email"
+                        android:textColor="#fe6100"
+                        android:textSize="24sp"
+                        android:textStyle="bold|italic"
+                        app:layout_constraintBottom_toBottomOf="@+id/ivEmailKontaObrazek"
+                        app:layout_constraintStart_toEndOf="@+id/ivEmailKontaObrazek"
+                        app:layout_constraintTop_toTopOf="@+id/ivEmailKontaObrazek" />
+
+                    <TextView
+                        android:id="@+id/tvEmailKontaText"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/tu_emailkonta"
+                        android:textColor="@color/ibm_purple"
+                        android:textSize="24sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvEmailKonta"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvEmailKonta"
+                        app:layout_constraintTop_toTopOf="@+id/tvEmailKonta" />
+
+                    <ImageView
+                        android:id="@+id/ivHasloKontaObrazek"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:contentDescription="@string/password"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ivEmailKontaObrazek"
+                        app:srcCompat="@drawable/ic_haslo" />
+
+                    <TextView
+                        android:id="@+id/tvHasloKonta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/password"
+                        android:textColor="#fe6100"
+                        android:textSize="24sp"
+                        android:textStyle="bold|italic"
+                        app:layout_constraintBottom_toBottomOf="@+id/ivHasloKontaObrazek"
+                        app:layout_constraintStart_toEndOf="@+id/ivHasloKontaObrazek"
+                        app:layout_constraintTop_toTopOf="@+id/ivHasloKontaObrazek" />
+
+                    <TextView
+                        android:id="@+id/tvHasloKontaText"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/tu_haslokonta"
+                        android:textColor="@color/ibm_purple"
+                        android:textSize="24sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvHasloKonta"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvHasloKonta"
+                        app:layout_constraintTop_toTopOf="@+id/tvHasloKonta" />
+
+                    <TextView
+                        android:id="@+id/tvSrodkiKonta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/money"
+                        android:textColor="#fe6100"
+                        android:textSize="24sp"
+                        android:textStyle="bold|italic"
+                        app:layout_constraintBottom_toBottomOf="@+id/ivSrodkiKontaObrazek"
+                        app:layout_constraintStart_toEndOf="@+id/ivSrodkiKontaObrazek"
+                        app:layout_constraintTop_toTopOf="@+id/ivSrodkiKontaObrazek" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvYourAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/your_account"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/ivAccountImageAccountActivity"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/ivAccountImageAccountActivity"
-            android:layout_width="148dp"
-            android:layout_height="166dp"
-            android:contentDescription="@string/user_profile_picture"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.093"
-            app:srcCompat="@drawable/ic_accountimage" />
-
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/coordinatorLayout"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView4"
-            app:layout_constraintVertical_bias="1.0">
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.bottomappbar.BottomAppBar
                 android:id="@+id/app_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:backgroundTint="#f6f6f6"
-                app:fabCradleMargin="8dp"
-                app:fabCradleRoundedCornerRadius="50dp"
-                app:fabCradleVerticalOffset="6dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="@color/material_dynamic_neutral_variant40"
+                app:contentInsetEnd="0dp"
+                app:contentInsetStart="0dp"
+                app:fabCradleMargin="0dp"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="0dp">
 
@@ -280,124 +278,117 @@
 
                     <LinearLayout
                         android:id="@+id/homeBtn"
-                        android:layout_width="0dp"
+                        android:layout_width="85dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"
                         android:orientation="vertical">
 
                         <ImageView
                             android:id="@+id/ivOrderFood"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10px"
-                            android:layout_weight="1"
+                            android:layout_height="50dp"
+                            android:layout_margin="3dp"
                             android:background="#F3DB0E"
-                            android:backgroundTint="#F39B04"
+                            android:backgroundTint="@color/ibm_orange"
                             android:contentDescription="@string/order_food_icon"
                             app:srcCompat="@drawable/ic_foodlist" />
 
                         <TextView
                             android:id="@+id/tvOrderYourFood"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="@string/order_food"
                             android:textAlignment="center"
-                            android:textColor="#676767"
-                            android:textSize="16sp"
-                            android:textStyle="bold|italic"></TextView>
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold|italic" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/BtnListOfOrders"
-                        android:layout_width="0dp"
+                        android:layout_width="104dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"
                         android:orientation="vertical">
 
                         <ImageView
                             android:id="@+id/ivListOfOrders"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10px"
-                            android:layout_weight="1"
+                            android:layout_height="50dp"
+                            android:layout_margin="3dp"
                             android:background="#F3DB0E"
-                            android:backgroundTint="#F39B04"
+                            android:backgroundTint="@color/ibm_orange"
                             android:contentDescription="@string/no_orders_add_some_by_clicking_here"
                             app:srcCompat="@drawable/ic_listoforders" />
 
                         <TextView
                             android:id="@+id/tvYourOrders"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="@string/your_orders"
                             android:textAlignment="center"
-                            android:textColor="#676767"
-                            android:textSize="16sp"
-                            android:textStyle="bold|italic"></TextView>
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold|italic" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/BtnAcc"
-                        android:layout_width="0dp"
+                        android:layout_width="85dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"
                         android:orientation="vertical">
 
                         <ImageView
                             android:id="@+id/ivAccount"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10px"
-                            android:layout_weight="1"
+                            android:layout_height="50dp"
+                            android:layout_margin="3dp"
                             android:background="#F3DB0E"
-                            android:backgroundTint="#F39B04"
+                            android:backgroundTint="@color/ibm_orange"
                             android:contentDescription="@string/account_icon"
-                            app:srcCompat="@drawable/ic_account" />
+                            app:srcCompat="@drawable/ic_account_black" />
 
                         <TextView
                             android:id="@+id/tvAccount"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
                             android:text="@string/account"
                             android:textAlignment="center"
-                            android:textColor="#676767"
-                            android:textSize="16sp"
-                            android:textStyle="bold|italic"></TextView>
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold|italic" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/BtnSettings"
-                        android:layout_width="0dp"
+                        android:layout_width="85dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"
                         android:orientation="vertical">
 
                         <ImageView
                             android:id="@+id/ivSettings"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10px"
-                            android:layout_weight="1"
+                            android:layout_height="50dp"
+                            android:layout_margin="3dp"
                             android:background="#F3DB0E"
-                            android:backgroundTint="#F39B04"
+                            android:backgroundTint="@color/ibm_orange"
                             android:contentDescription="@string/settings_icon"
                             app:srcCompat="@drawable/ic_settings" />
 
                         <TextView
                             android:id="@+id/tvSettings"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
                             android:text="@string/settings"
                             android:textAlignment="center"
-                            android:textColor="#676767"
-                            android:textSize="16sp"
-                            android:textStyle="bold|italic"></TextView>
+                            android:textColor="@color/white"
+                            android:textSize="17sp"
+                            android:textStyle="bold|italic" />
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.bottomappbar.BottomAppBar>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 
 
         <ScrollView

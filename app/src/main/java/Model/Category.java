@@ -3,9 +3,12 @@ package Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Category implements Parcelable {
+public class Category {
     private String title;
     private String pic;
+
+    public Category() {
+    }
 
     public Category(String title, String pic) {
         this.title = title;
@@ -28,13 +31,4 @@ public class Category implements Parcelable {
         this.pic = pic;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-
-    }
 }

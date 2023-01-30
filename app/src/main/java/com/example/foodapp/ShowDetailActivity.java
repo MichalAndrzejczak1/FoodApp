@@ -1,42 +1,39 @@
 package com.example.foodapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
+import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO;
+import static androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES;
+import static androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
+import android.icu.text.DecimalFormat;
+import android.icu.text.NumberFormat;
+import android.os.Build;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.example.foodapp.databinding.ActivityShowDetailBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
 import java.util.Date;
-import java.util.Locale;
 
 import Model.Order;
 import Model.User;
@@ -52,17 +49,16 @@ public class ShowDetailActivity extends AppCompatActivity {
     private int activeProdcutNumber;
     private double price;
     private String title;
+    private String picture;
     private String description;
     private String money = "0";
     private Double dMoney;
-    FirebaseAuth.AuthStateListener authStateListener;
 
     private CollectionReference collectionReference = db.collection("Users");
     private final CollectionReference collectionReference2 = db.collection("Orders");
 
-    TextToSpeech tts;
 
-
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Shared preferences
@@ -83,29 +79,18 @@ public class ShowDetailActivity extends AppCompatActivity {
         currentUser = auth.getCurrentUser();
         binding = DataBindingUtil.setContentView(this, R.layout.activity_show_detail);
 
-
-        //Dolne menu
-//        binding.ivOrderFood.setOnClickListener(view -> startActivity(new Intent(ShowDetailActivity.this, OrderingActivity.class)));
-//        binding.ivListOfOrders.setOnClickListener(view -> startActivity(new Intent(ShowDetailActivity.this, FoodListActivity.class)));
-//        binding.ivAccount.setOnClickListener(view -> startActivity(new Intent(ShowDetailActivity.this, AccountActivity.class)));
-//        binding.ivSettings.setOnClickListener(view -> startActivity(new Intent(ShowDetailActivity.this, SettingsActivity.class)));
-
         //Firesbase powitanie
         collectionReference.whereEqualTo("userId", OrderApi.getInstance()
                         .getUserId())
                 .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if(!queryDocumentSnapshots.isEmpty()){
-                            for (QueryDocumentSnapshot users : queryDocumentSnapshots){
-                                User user = users.toObject(User.class);
-                                money = user.getMoney();
-                            }
-
-                        }else {
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        for (QueryDocumentSnapshot users : queryDocumentSnapshots) {
+                            User user = users.toObject(User.class);
+                            money = user.getMoney();
                         }
+
+                    } else {
                     }
                 }).addOnFailureListener(e -> Toast.makeText(ShowDetailActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show());
 
@@ -115,263 +100,99 @@ public class ShowDetailActivity extends AppCompatActivity {
             description = extras.getString("description");
             title = extras.getString("title");
             price = extras.getDouble("price");
+            picture = extras.getString("picture");
             activeCategoryNumber = extras.getInt("activeCategoryNumber");
             activeProdcutNumber = extras.getInt("activeProductNumber");
         }
         binding.tvTitleShowDetails.setText(title);
         binding.tvDescription.setText(description);
-        binding.tvPriceShowDetails.setText("$"+price);
+        binding.tvPriceShowDetails.setText("$" + price);
+        binding.ivProductShowDetail.setImageResource(this.getResources().getIdentifier(picture, "drawable", this.getPackageName()));
+//        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.burger1));
 
-        switch (activeCategoryNumber) {
-            case 0:{
-                //pizzas
-                switch (activeProdcutNumber){
-                    case 0:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.pizza1));
-                        break;
-                    }
-                    case 1:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.pizza2));
-                        break;
-                    }
-                    case 2:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.pizza3));
-                        break;
-                    }
-                    case 3:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.pizza4));
-                        break;
-                    }
-                    case 4:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.pizza5));
-                        break;
-                    }
-                }
-                break;
-            }
-            case 1:{
-                //burgers
-                switch (activeProdcutNumber){
-                    case 0:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.burger1));
-                        break;
-                    }
-                    case 1:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.burger2));
-                        break;
-                    }
-                    case 2:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.burger3));
-                        break;
-                    }
-                    case 3:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.burger4));
-                        break;
-                    }
-                    case 4:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.burger5));
-                        break;
-                    }
-                }
-                break;
-            }
-            case 2:{
-                //hotdogs
-                switch (activeProdcutNumber){
-                    case 0:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.hotdog1));
-                        break;
-                    }
-                    case 1:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.hotdog2));
-                        break;
-                    }
-                    case 2:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.hotdog3));
-                        break;
-                    }
-                }
-                break;
-            }
-            case 3:{
-                //drinks
-                switch (activeProdcutNumber){
-                    case 0:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.drink1));
-                        break;
-                    }
-                    case 1:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.drink2));
-                        break;
-                    }
-                    case 2:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.drink3));
-                        break;
-                    }
-                    case 3:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.drink4));
-                        break;
-                    }
-                    case 4:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.drink5));
-                        break;
-                    }
-                }
-                break;
-            }
-            case 4:{
-                //donuts
-                switch (activeProdcutNumber){
-                    case 0:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.donut1));
-                        break;
-                    }
-                    case 1:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.donut2));
-                        break;
-                    }
-                    case 2:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.donut3));
-                        break;
-                    }
-                    case 3:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.donut4));
-                        break;
-                    }
-                    case 4:{
-                        binding.ivProductShowDetail.setImageDrawable(getResources().getDrawable(R.drawable.donut5));
-                        break;
-                    }
-                }
-                break;
-            }
-        }
-
+        NumberFormat formatter = new DecimalFormat("##.00");
         //On click listener on plus button
-        binding.ivPlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int count = Integer.parseInt(binding.tvCount.getText().toString());
-                count++;
-                binding.tvCount.setText(String.valueOf(count));
-                binding.tvPriceShowDetails.setText("$"+ String.valueOf(price*count));
-            }
+        binding.ivPlus.setOnClickListener(view -> {
+            int count = Integer.parseInt(binding.tvCount.getText().toString());
+            count++;
+            binding.tvCount.setText(String.valueOf(count));
+
+            binding.tvPriceShowDetails.setText("$" + formatter.format(price * count));
         });
 
         //On click listener on minus button
-        binding.ivMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int count = Integer.parseInt(binding.tvCount.getText().toString());
-                if(count != 1) {
-                    count--;
-                    binding.tvCount.setText(String.valueOf(count));
-                }
-                binding.tvPriceShowDetails.setText("$"+ String.valueOf(price*count));
+        binding.ivMinus.setOnClickListener(view -> {
+            int count = Integer.parseInt(binding.tvCount.getText().toString());
+            if (count != 1) {
+                count--;
+                binding.tvCount.setText(String.valueOf(count));
             }
+            binding.tvPriceShowDetails.setText(formatter.format(price * count));
         });
 
         //On click listener on make order button
-        binding.btnMakeOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                binding.pbShowDetail.setVisibility(View.VISIBLE);
+        binding.btnMakeOrder.setOnClickListener(view -> {
+            binding.pbShowDetail.setVisibility(View.VISIBLE);
 
-                if(!TextUtils.isEmpty(title) && !TextUtils.isEmpty(description))
-                {
-                    double tPrice = price * Double.parseDouble(binding.tvCount.getText().toString());
-                    dMoney = Double.parseDouble(money);
-                    if(dMoney >= tPrice) {
-                        //You have enough money to make an order.
+            if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(description)) {
+                double tPrice = price * Double.parseDouble(binding.tvCount.getText().toString());
+                dMoney = Double.parseDouble(money);
+                if (dMoney >= tPrice) {
+                    //You have enough money to make an order.
 
-                        //Removing specific amount of money from your account
-                        //// Wyłuskiwanie dokumentu korzystając z query
-                        Query query = collectionReference.whereEqualTo("userId", auth.getUid());
-                        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                        //Uaktualnianie URL użytkownika
-                                        db.collection("Users")
-                                                .document(document.getId())
-                                                .update("money", String.valueOf(dMoney-tPrice));          //
-                                    }
+                    //Removing specific amount of money from your account
+                    //// Wyłuskiwanie dokumentu korzystając z query
+                    Query query = collectionReference.whereEqualTo("userId", auth.getUid());
+                    query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    //Uaktualnianie URL użytkownika
+                                    db.collection("Users")
+                                            .document(document.getId())
+                                            .update("money", String.valueOf(dMoney - tPrice));          //
                                 }
                             }
-                        });
+                        }
+                    });
 
-                        //Adding order to OrdersCollection
-                        Order order = new Order();
-                        order.setTitle(title);
-                        order.setDescription(description);
-                        order.setTimeAdded(new Timestamp(new Date()));
-                        order.setUserId(currentUser.getUid());
-                        order.settPrice(price * Double.parseDouble(binding.tvCount.getText().toString()));
-                        order.setCount(Integer.parseInt(binding.tvCount.getText().toString()));
-                        order.setProductNumber(activeProdcutNumber);
-                        order.setCategoryNumber(activeCategoryNumber);
+                    //Adding order to OrdersCollection
+                    Order order = new Order();
+                    order.setTitle(title);
+                    order.setDescription(description);
+                    order.setTimeAdded(new Timestamp(new Date()));
+                    order.setUserId(currentUser.getUid());
+                    order.setPicture(picture);
+                    order.settPrice(Math.round(price * Double.parseDouble(binding.tvCount.getText().toString())) * 100.0 / 100.0);
+                    order.setCount(Integer.parseInt(binding.tvCount.getText().toString()));
+                    order.setProductNumber(activeProdcutNumber);
+                    order.setCategoryNumber(activeCategoryNumber);
 
-                        collectionReference2.add(order).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                binding.pbShowDetail.setVisibility(View.INVISIBLE);
-                                startActivity(new Intent(ShowDetailActivity.this, FoodListActivity.class));
-                                Toast.makeText(ShowDetailActivity.this, getString(R.string.making_order_done), Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                binding.pbShowDetail.setVisibility(View.INVISIBLE);
-                                Log.d("ShowDetailActivity", "onFailure: + adding order + "+ e.getMessage());
-                            }
-                        });
+                    collectionReference2.add(order).addOnSuccessListener(documentReference -> {
+                        binding.pbShowDetail.setVisibility(View.INVISIBLE);
+                        startActivity(new Intent(ShowDetailActivity.this, FoodListActivity.class));
+                        Toast.makeText(ShowDetailActivity.this, getString(R.string.making_order_done), Toast.LENGTH_SHORT).show();
+                        finish();
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            binding.pbShowDetail.setVisibility(View.INVISIBLE);
+                            Log.d("ShowDetailActivity", "onFailure: + adding order + " + e.getMessage());
+                        }
+                    });
 
-                    }
-                    else {
-                        Toast.makeText(ShowDetailActivity.this, getString(R.string.not_enough_money_to_order), Toast.LENGTH_SHORT).show();
-                    }
+                } else {
+                    Toast.makeText(ShowDetailActivity.this, getString(R.string.not_enough_money_to_order), Toast.LENGTH_SHORT).show();
+                }
 
-
-                    }
-                binding.pbShowDetail.setVisibility(View.INVISIBLE);
 
             }
-        });
+            binding.pbShowDetail.setVisibility(View.INVISIBLE);
 
-        tts = new TextToSpeech(ShowDetailActivity.this, i -> {
-            if (i != TextToSpeech.ERROR) {
-                tts.setLanguage(Locale.getDefault());
-            }
         });
-
     }
     //End of onCreate
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_speak:
-                tts.speak(getString(R.string.show_detail_activity_hint), TextToSpeech.QUEUE_FLUSH, null);
-                break;
-            case R.id.action_signout:
-                if( currentUser != null && auth != null){
-                    auth.signOut();
-                }
-                startActivity(new Intent(this, MainActivity.class));
-                finish();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
 
 }

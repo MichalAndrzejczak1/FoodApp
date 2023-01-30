@@ -19,15 +19,22 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/inapp_sound_level"
-            android:textColor="#0E0000"
-            android:textSize="16sp"
+            android:textColor="@color/ibm_orange"
+            android:textSize="34sp"
             app:layout_constraintTop_toBottomOf="@+id/swSilentMode" />
 
         <SeekBar
             android:id="@+id/sbSoundLevel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.SeekBar"
+            android:layout_width="368dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:padding="10dp"
+            android:progressBackgroundTint="@color/ibm_orange"
+            android:thumb="@drawable/large_thumb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvSoundLevel" />
 
         <TextView
@@ -37,7 +44,8 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/settings"
-            android:textSize="20sp"
+            android:textColor="@color/ibm_orange"
+            android:textSize="48sp"
             android:textStyle="bold|italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,6 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="@string/logout_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/swLogout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,12 +67,15 @@
         <Switch
             android:id="@+id/swLogout"
             android:layout_width="250dp"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:padding="10dp"
             android:paddingTop="10dp"
             android:text="@string/logout_on_exit"
-            android:textSize="18dp"
+            android:textColor="@color/ibm_orange"
+            android:textColorHint="@color/ibm_orange"
+            android:textSize="24sp"
+            android:thumbTint="@color/ibm_pink"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/ivLogout"
@@ -75,6 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="@string/night_theme_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/swNightTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -84,13 +97,15 @@
         <Switch
             android:id="@+id/swNightTheme"
             android:layout_width="250dp"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="4dp"
             android:padding="10dp"
             android:paddingTop="10dp"
             android:text="@string/night_theme"
-            android:textSize="18dp"
+            android:textColor="@color/ibm_orange"
+            android:textSize="24sp"
+            android:thumbTint="@color/ibm_pink"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/ivNightTheme"
@@ -103,6 +118,7 @@
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:contentDescription="@string/silent_mode_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/swSilentMode"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -112,13 +128,15 @@
         <Switch
             android:id="@+id/swSilentMode"
             android:layout_width="250dp"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="4dp"
             android:padding="10dp"
             android:paddingTop="10dp"
             android:text="@string/silent_mode"
-            android:textSize="18dp"
+            android:textColor="@color/ibm_orange"
+            android:textSize="24sp"
+            android:thumbTint="@color/ibm_pink"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/ivSilentMode"
@@ -126,23 +144,21 @@
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/coordinatorLayout"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView4"
-            app:layout_constraintVertical_bias="1.0">
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.bottomappbar.BottomAppBar
                 android:id="@+id/app_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:backgroundTint="#f6f6f6"
-                app:fabCradleMargin="8dp"
-                app:fabCradleRoundedCornerRadius="50dp"
-                app:fabCradleVerticalOffset="6dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="@color/material_dynamic_neutral_variant40"
+                app:contentInsetEnd="0dp"
+                app:contentInsetStart="0dp"
+                app:fabCradleMargin="0dp"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="0dp">
 
@@ -153,118 +169,112 @@
 
                     <LinearLayout
                         android:id="@+id/homeBtn"
-                        android:layout_width="0dp"
+                        android:layout_width="85dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"
                         android:orientation="vertical">
 
                         <ImageView
                             android:id="@+id/ivOrderFood"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10px"
-                            android:layout_weight="1"
+                            android:layout_height="50dp"
+                            android:layout_margin="3dp"
                             android:background="#F3DB0E"
-                            android:backgroundTint="#F39B04"
-                            android:contentDescription="@string/order_food"
+                            android:backgroundTint="@color/ibm_orange"
+                            android:contentDescription="@string/order_food_icon"
                             app:srcCompat="@drawable/ic_foodlist" />
 
                         <TextView
                             android:id="@+id/tvOrderYourFood"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="@string/order_food"
                             android:textAlignment="center"
-                            android:textColor="#676767"
-                            android:textSize="16sp"
-                            android:textStyle="bold|italic"></TextView>
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold|italic" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/BtnListOfOrders"
-                        android:layout_width="0dp"
+                        android:layout_width="104dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"
                         android:orientation="vertical">
 
                         <ImageView
                             android:id="@+id/ivListOfOrders"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10px"
-                            android:layout_weight="1"
+                            android:layout_height="50dp"
+                            android:layout_margin="3dp"
                             android:background="#F3DB0E"
-                            android:backgroundTint="#F39B04"
-                            android:contentDescription="@string/orders_list_logo"
+                            android:backgroundTint="@color/ibm_orange"
+                            android:contentDescription="@string/no_orders_add_some_by_clicking_here"
                             app:srcCompat="@drawable/ic_listoforders" />
 
                         <TextView
                             android:id="@+id/tvYourOrders"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="@string/your_orders"
                             android:textAlignment="center"
-                            android:textColor="#676767"
-                            android:textSize="16sp"
-                            android:textStyle="bold|italic"></TextView>
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold|italic" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/BtnAcc"
-                        android:layout_width="0dp"
+                        android:layout_width="85dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"
                         android:orientation="vertical">
 
                         <ImageView
                             android:id="@+id/ivAccount"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10px"
-                            android:layout_weight="1"
+                            android:layout_height="50dp"
+                            android:layout_margin="3dp"
                             android:background="#F3DB0E"
-                            android:backgroundTint="#F39B04"
+                            android:backgroundTint="@color/ibm_orange"
                             android:contentDescription="@string/account_icon"
-                            app:srcCompat="@drawable/ic_account" />
+                            app:srcCompat="@drawable/ic_account_black" />
 
                         <TextView
                             android:id="@+id/tvAccount"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
                             android:text="@string/account"
                             android:textAlignment="center"
-                            android:textColor="#676767"
-                            android:textSize="16sp"
-                            android:textStyle="bold|italic"></TextView>
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold|italic" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/BtnSettings"
-                        android:layout_width="0dp"
+                        android:layout_width="85dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"
                         android:orientation="vertical">
 
                         <ImageView
                             android:id="@+id/ivSettings"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10px"
-                            android:layout_weight="1"
+                            android:layout_height="50dp"
+                            android:layout_margin="3dp"
                             android:background="#F3DB0E"
-                            android:backgroundTint="#F39B04"
+                            android:backgroundTint="@color/ibm_orange"
                             android:contentDescription="@string/settings_icon"
                             app:srcCompat="@drawable/ic_settings" />
 
                         <TextView
                             android:id="@+id/tvSettings"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
                             android:text="@string/settings"
                             android:textAlignment="center"
-                            android:textColor="#676767"
-                            android:textSize="16sp"
-                            android:textStyle="bold|italic"></TextView>
+                            android:textColor="@color/white"
+                            android:textSize="17sp"
+                            android:textStyle="bold|italic" />
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.bottomappbar.BottomAppBar>
